@@ -15,7 +15,7 @@ const Pricings = () => {
                                 Basic Plan
                             </span>
                             <span className="poppins-medium text-xs text-gray-400">
-                                Perfect for individuals
+                                Perfect for getting started
                             </span>
                             <hr className="my-5 border-gray-300" />
                             <span className="poppins-semibold">
@@ -37,22 +37,19 @@ const Pricings = () => {
                             <hr className="my-5 border-gray-300" />
                             <span className="poppins-medium flex flex-col text-sm">
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;All product features
+                                    ✔ &nbsp;&nbsp;&nbsp;Personal Nutrition
                                 </span>
                                 <span className="my-2">
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited lists & tasks
+                                    ✔ &nbsp;&nbsp;&nbsp;Smart Meals
                                 </span>
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;Priority Support
+                                    ✔ &nbsp;&nbsp;&nbsp;Calorie Awareness
                                 </span>
                                 <span className="my-2">
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited Tasks
+                                    ✔ &nbsp;&nbsp;&nbsp;Healthy Guidance
                                 </span>
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited file storage
-                                </span>
-                                <span className="my-2">
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited projects
+                                    ✔ &nbsp;&nbsp;&nbsp;Daily Balance
                                 </span>
                             </span>
                         </div>
@@ -61,7 +58,7 @@ const Pricings = () => {
                                 Pro Plan
                             </span>
                             <span className="poppins-medium text-xs text-gray-300">
-                                Perfect for individuals
+                                Personalised Health
                             </span>
                             <hr className="my-5 border-gray-300" />
                             <span className="poppins-semibold">
@@ -86,22 +83,19 @@ const Pricings = () => {
                             <hr className="my-5 border-gray-300" />
                             <span className="poppins-medium flex flex-col text-sm text-white">
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;All product features
+                                    ✔ &nbsp;&nbsp;&nbsp;Adaptive Nutrition
                                 </span>
                                 <span className="my-2">
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited lists & tasks
+                                    ✔ &nbsp;&nbsp;&nbsp;Condition Aware
                                 </span>
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;Priority Support
+                                    ✔ &nbsp;&nbsp;&nbsp;Macro Intelligence
                                 </span>
                                 <span className="my-2">
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited Tasks
+                                    ✔ &nbsp;&nbsp;&nbsp;Meal Precision
                                 </span>
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited file storage
-                                </span>
-                                <span className="my-2">
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited projects
+                                    ✔ &nbsp;&nbsp;&nbsp;Health Alignment
                                 </span>
                             </span>
                         </div>
@@ -110,7 +104,7 @@ const Pricings = () => {
                                 Advanced Plan
                             </span>
                             <span className="poppins-medium text-xs text-gray-400">
-                                Perfect for individuals
+                                For detailed insights & tracking
                             </span>
                             <hr className="my-5 border-gray-300" />
                             <span className="poppins-semibold">
@@ -132,19 +126,19 @@ const Pricings = () => {
                             <hr className="my-5 border-gray-300" />
                             <span className="poppins-medium flex flex-col text-sm">
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;All product features
+                                    ✔ &nbsp;&nbsp;&nbsp;Holistic Nutrition
                                 </span>
                                 <span className="my-2">
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited lists & tasks
+                                    ✔ &nbsp;&nbsp;&nbsp;Multi-Condition
                                 </span>
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;Priority Support
+                                    ✔ &nbsp;&nbsp;&nbsp;Nutrient Intelligence
                                 </span>
                                 <span className="my-2">
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited Tasks
+                                    ✔ &nbsp;&nbsp;&nbsp;Diet Mastery
                                 </span>
                                 <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;Unlimited file storage
+                                    ✔ &nbsp;&nbsp;&nbsp;Wellness Optimization
                                 </span>
                                 <span className="my-2">
                                     ✔ &nbsp;&nbsp;&nbsp;Unlimited projects

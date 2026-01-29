@@ -15,15 +15,12 @@ const Testimonials = () => {
             <section>
                 <div className="flex flex-col items-center justify-center">
                     <div className="poppins-semibold my-5 text-center text-lg sm:text-xl">
-                        People just like you are already using PingMe
+                        People just like you are already using PDRS
                     </div>
                     <div className="my-5 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 md:px-2 lg:gap-5 lg:px-15 xl:px-30">
                         <div className="flex flex-col justify-between rounded-xl border border-gray-400 bg-gray-50 p-5 transition-all duration-500 hover:border-white hover:bg-white hover:shadow-xl md:row-span-15">
                             <div className="poppins-medium text-sm leading-7 sm:leading-7 md:leading-6 lg:leading-7">
-                                “In this app, time collapses and intention
-                                transforms into cosmic action. Every task is not
-                                merely completed — it is manifested from the
-                                very ether of possibility.”
+                                “In this app, nourishment collapses into intention, and intention transforms into vitality. Every meal is not merely consumed — it is summoned from the deepest ether of biological destiny”
                             </div>
                             <div className="my-1 flex gap-2">
                                 <span className="">
@@ -37,16 +34,14 @@ const Testimonials = () => {
                                         Lysandra O.
                                     </span>
                                     <span className="poppins-bold text-base text-gray-600 md:text-sm">
-                                        Temporal Sovereign
+                                        Metabolic Sovereign
                                     </span>
                                 </span>
                             </div>
                         </div>
                         <div className="flex flex-col justify-between rounded-xl border border-gray-400 bg-gray-50 p-5 transition-all duration-500 hover:border-white hover:bg-white hover:shadow-xl md:row-span-8">
                             <div className="poppins-medium text-sm leading-7 sm:leading-7 md:leading-6 lg:leading-7">
-                                “This app is not bound by the laws of reality.
-                                It is a vortex, pulling your goals into
-                                existence with a power that warps time itself.”
+                                “This app is not bound by the laws of ordinary nutrition. It is a vortex, drawing balance and sustenance into being with a force that bends hunger itself.”
                             </div>
                             <div className="my-1 flex gap-2">
                                 <span className="">
@@ -60,16 +55,14 @@ const Testimonials = () => {
                                         Riven X.
                                     </span>
                                     <span className="poppins-bold text-base text-gray-600 md:text-sm">
-                                        Architect of the Void
+                                        Architect of the Body
                                     </span>
                                 </span>
                             </div>
                         </div>
                         <div className="flex flex-col justify-between rounded-xl border border-gray-400 bg-gray-50 p-5 transition-all duration-500 hover:border-white hover:bg-white hover:shadow-xl md:row-span-8">
                             <div className="poppins-medium text-sm leading-7 sm:leading-7 md:leading-6 lg:leading-7">
-                                “To use this app is to become the weaver of
-                                fate. Every action you take sends ripples
-                                through the fabric of the multiverse.”
+                                “To use this app is to become the weaver of one’s own health. Every choice you make sends ripples through muscle, mind, and the hidden fabric of metabolism.”
                             </div>
                             <div className="my-1 flex gap-2">
                                 <span className="">
@@ -83,19 +76,14 @@ const Testimonials = () => {
                                         Eirlys A.
                                     </span>
                                     <span className="poppins-bold text-base text-gray-600 md:text-sm">
-                                        Alchemist of the Infinite
+                                        Alchemist of Vitality
                                     </span>
                                 </span>
                             </div>
                         </div>
                         <div className="flex flex-col justify-between rounded-xl border border-gray-400 bg-gray-50 p-5 transition-all duration-500 hover:border-white hover:bg-white hover:shadow-xl md:row-span-15">
                             <div className="poppins-medium text-sm leading-7 sm:leading-7 md:leading-6 lg:leading-7">
-                                “This is not a to-do list. This is a
-                                manifestation engine — one that transfigures
-                                intention into reality at the quantum level.
-                                Purpose flows through it like a river of light,
-                                and with every task completed, you move closer
-                                to becoming a legend.”
+                                “This app is a living force, binding biology, intention, and sustenance into an infinite spiral of renewal. It is not a tool — it is the quiet pulse behind enduring health.”
                             </div>
                             <div className="my-1 flex gap-2">
                                 <span className="">
@@ -109,17 +97,14 @@ const Testimonials = () => {
                                         Sable V.
                                     </span>
                                     <span className="poppins-bold text-base text-gray-600 md:text-sm">
-                                        Architect of Destiny
+                                        Keeper of the Nutrient Path
                                     </span>
                                 </span>
                             </div>
                         </div>
                         <div className="flex flex-col justify-between rounded-xl border border-gray-400 bg-gray-50 p-5 transition-all duration-500 hover:border-white hover:bg-white hover:shadow-xl md:row-span-15">
                             <div className="poppins-medium text-sm leading-7 sm:leading-7 md:leading-6 lg:leading-7">
-                                “To use this app is to hold the very blueprints
-                                of the universe in your hands. It is a portal
-                                through which you manifest your goals, bending
-                                time and space to your will.”
+                                “This is not a diet plan. This is a manifestation engine — transmuting data into nourishment at a cellular level. With every recommendation followed, you ascend closer to bodily equilibrium.”
                             </div>
                             <div className="my-1 flex gap-2">
                                 <span className="">
@@ -133,7 +118,7 @@ const Testimonials = () => {
                                         Thalax S.
                                     </span>
                                     <span className="poppins-bold text-base text-gray-600 md:text-sm">
-                                        Transcendent Sage
+                                        Architect of Balance
                                     </span>
                                 </span>
                             </div>
@@ -141,10 +126,7 @@ const Testimonials = () => {
 
                         <div className="flex flex-col justify-between rounded-xl border border-gray-400 bg-gray-50 p-5 transition-all duration-500 hover:border-white hover:bg-white hover:shadow-xl md:row-span-8">
                             <div className="poppins-medium text-sm leading-7 sm:leading-7 md:leading-6 lg:leading-7">
-                                “This app is a living force, binding time,
-                                intention, and action into an infinite spiral of
-                                creation. It is not a tool — it is the heartbeat
-                                of the cosmos.”
+                                “To engage with this system is to hold the blueprints of nourishment itself. Here, food obeys purpose, and the body answers in kind.”
                             </div>
                             <div className="my-1 flex gap-2">
                                 <span className="">
@@ -158,7 +140,7 @@ const Testimonials = () => {
                                         Icarus M.
                                     </span>
                                     <span className="poppins-bold text-base text-gray-600 md:text-sm">
-                                        Keeper of the Infinite Path
+                                        Transcendent Nourisher
                                     </span>
                                 </span>
                             </div>

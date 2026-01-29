@@ -6,19 +6,6 @@ import AppleIcon from "./SignInIcons/AppleIcon.png";
 import NameIcon from "./SignInIcons/NameIcon.png";
 import HidePasswordIcon from "./SignInIcons/HidePasswordIcon.png";
 import ShowPasswordIcon from "./SignInIcons/ShowPasswordIcon.png";
-import CalendarIcon from "./CalendarIcons/CalendarIcon.svg";
-import LeftArrowIcon from "./CalendarIcons/LeftArrowIcon.svg";
-import RightArrowIcon from "./CalendarIcons/RightArrowIcon.svg";
-import DownArrowIcon from "./CalendarIcons/DownArrowIcon.svg";
-import AddIcon from "./CalendarIcons/AddIcon.svg";
-import CloseIcon from "./CalendarIcons/CloseIcon.svg";
-import RefreshIcon from "./CalendarIcons/RefreshIcon.svg";
-import HomeIcon from "./UserDashboardIcons/HomeIcon.svg";
-import SettingsIcon from "./UserDashboardIcons/SettingsIcon.svg";
-import ChatIcon from "./UserDashboardIcons/ChatIcon.svg";
-import ScheduleIcon from "./UserDashboardIcons/ScheduleIcon.svg";
-import UserAvatarDefaultIcon from "./UserDashboardIcons/UserAvatarDefaultIcon.png";
-import SearchIcon from "./UserDashboardIcons/SearchIcon.png";
 import ThemeToggle_Dark from "./ThemeChangeIcons/ThemeToggle_Dark.png";
 import ThemeToggle_Light from "./ThemeChangeIcons/ThemeToggle_Light.png";
 import ChecklistPenIcon from "./HomeIcons/ChecklistPenIcon.png";
@@ -45,19 +32,6 @@ export {
     HidePasswordIcon,
     ShowPasswordIcon,
     NameIcon,
-    CalendarIcon,
-    LeftArrowIcon,
-    RightArrowIcon,
-    DownArrowIcon,
-    AddIcon,
-    CloseIcon,
-    RefreshIcon,
-    HomeIcon,
-    SettingsIcon,
-    ChatIcon,
-    ScheduleIcon,
-    UserAvatarDefaultIcon,
-    SearchIcon,
     ThemeToggle_Light,
     ThemeToggle_Dark,
     ChecklistPenIcon,
