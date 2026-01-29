@@ -35,18 +35,18 @@ const Home = () => {
             <div className="flex items-center justify-center pt-20 sm:h-screen sm:pt-0">
                 <div className="flex flex-col items-center">
                     <span className="w-22 rounded-2xl shadow-2xl">
-                        <img src={Logo} />
+                        <img src={Logo} className="w-20 mx-auto hover:scale-110" />
                     </span>
                     <div className="poppins-bold my-6 text-2xl sm:text-5xl">
                         Track. Plan.{" "}
-                        <span className="text-[#4b82ff]">Succeed.</span>
+                        <span className="text-[#0084cc]">Succeed.</span>
                     </div>
                     <div className="poppins-semibold px-5 text-center text-sm text-gray-500 sm:text-base">
                         PingMe isn’t just how you get things done—it’s how you
                         rise, reign, and rewrite reality with every move you
                         make.”
                     </div>
-                    <button className="poppins-semibold my-6 cursor-pointer rounded-2xl border border-2 border-[#4b82ff] bg-[#4b82ff] p-2 px-5 text-base text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-[#4b82ff]">
+                    <button className="poppins-semibold my-6 cursor-pointer rounded-2xl border border-2 border-[#0084cc] bg-[#0084cc] p-2 px-5 text-base text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-[#0084cc]">
                         <a
                             href="/signup"
                             target="_blank"
@@ -110,7 +110,7 @@ const Home = () => {
                         © {currentYear}. All rights reserved.
                     </div>
                     <div className="my-5 flex flex-wrap justify-center">
-                        <div className="mx-2 mb-4 cursor-pointer hover:text-[#4b82ff]">
+                        <div className="mx-2 mb-4 cursor-pointer hover:text-[#0084cc]">
                             <a
                                 href="/privacy"
                                 target="_blank"
@@ -119,7 +119,7 @@ const Home = () => {
                                 Privacy Policy
                             </a>
                         </div>
-                        <div className="mx-2 mb-4 cursor-pointer hover:text-[#4b82ff]">
+                        <div className="mx-2 mb-4 cursor-pointer hover:text-[#0084cc]">
                             <a
                                 href="/tos"
                                 target="_blank"
@@ -128,7 +128,7 @@ const Home = () => {
                                 Terms of Service
                             </a>
                         </div>
-                        <div className="mx-2 cursor-pointer hover:text-[#4b82ff]">
+                        <div className="mx-2 cursor-pointer hover:text-[#0084cc]">
                             <Link
                                 to="pricings"
                                 id="pricings"
@@ -139,7 +139,7 @@ const Home = () => {
                                 Pricing
                             </Link>
                         </div>
-                        <div className="mx-2 cursor-pointer hover:text-[#4b82ff]">
+                        <div className="mx-2 cursor-pointer hover:text-[#0084cc]">
                             <Link
                                 to="testimonials"
                                 id="testimonials"

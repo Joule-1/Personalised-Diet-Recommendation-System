@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/LandingPage/Home.jsx";
 import SignIn from "./components/SignIn.jsx";

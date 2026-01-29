@@ -12,7 +12,7 @@ const NavbarHome = () => {
                 <span className="poppins-semibold ml-2 text-xl">PingMe</span>
             </a>
             <div className="poppins-semibold flex hidden items-center md:block">
-                <span className="mx-5 cursor-pointer hover:text-[#4b82ff] sm:ml-10">
+                <span className="mx-5 cursor-pointer hover:text-[#0084cc] sm:ml-10">
                     <a
                         href="/privacy"
                         target="_blank"
@@ -27,11 +27,11 @@ const NavbarHome = () => {
                     offset={-40}
                     smooth={true}
                     duration={500}
-                    className="cursor-pointer hover:text-[#4b82ff] sm:ml-10"
+                    className="cursor-pointer hover:text-[#0084cc] sm:ml-10"
                 >
                     Pricing
                 </Link>
-                <span className="mx-5 cursor-pointer hover:text-[#4b82ff] sm:ml-10">
+                <span className="mx-5 cursor-pointer hover:text-[#0084cc] sm:ml-10">
                     <Link
                         to="testimonials"
                         id="testimonials"
@@ -46,7 +46,7 @@ const NavbarHome = () => {
             <div className="flex items-center">
                 <span
                     id="NavbarHomeSign"
-                    className="ml-5 cursor-pointer hover:text-[#4b82ff] sm:ml-5"
+                    className="ml-5 cursor-pointer hover:text-[#0084cc] sm:ml-5"
                 >
                     <a href="/signin" target="_blank" rel="noopener noreferrer">
                         Sign In
@@ -54,7 +54,7 @@ const NavbarHome = () => {
                 </span>
                 <span
                     id="NavbarHomeSign"
-                    className="poppins-semibold ml-2 cursor-pointer rounded-xl border border-2 bg-[#4b82ff] p-2 text-white hover:border-[#4b82ff] hover:bg-white hover:text-[#4b82ff] sm:ml-5"
+                    className="poppins-semibold ml-2 cursor-pointer rounded-xl border border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc] sm:ml-5"
                 >
                     <a href="/signup" target="_blank" rel="noopener noreferrer">
                         Sign Up

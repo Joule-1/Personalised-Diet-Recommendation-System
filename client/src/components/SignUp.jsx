@@ -249,7 +249,7 @@ function SignUp() {
                     <span className="text-gray-500">
                         Already have an account?
                     </span>
-                    <button className="poppins-semibold ml-2 cursor-pointer rounded-xl border-2 bg-[#4b82ff] p-2 text-white hover:border-[#4b82ff] hover:bg-white hover:text-[#4b82ff]">
+                    <button className="poppins-semibold ml-2 cursor-pointer rounded-xl border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc]">
                         <Link to="/signin">Sign In</Link>
                     </button>
                 </div>

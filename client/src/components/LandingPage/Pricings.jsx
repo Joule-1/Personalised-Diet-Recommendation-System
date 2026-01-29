@@ -24,7 +24,7 @@ const Pricings = () => {
                                     /mo
                                 </span>
                             </span>
-                            <button className="poppins-semibold my-5 cursor-pointer rounded-lg border border-2 border-[#4b82ff] bg-[#4b82ff] p-1 px-15 text-base text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-[#4b82ff]">
+                            <button className="poppins-semibold my-5 cursor-pointer rounded-lg border border-2 border-[#0084cc] bg-[#0084cc] p-1 px-15 text-base text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-[#0084cc]">
                                 <a
                                     href="/signup"
                                     target="_blank"
@@ -56,7 +56,7 @@ const Pricings = () => {
                                 </span>
                             </span>
                         </div>
-                        <div className="flex scale-110 flex-col rounded-xl border border-[#4b82ff] bg-[#4b82ff] p-5 px-5 shadow-xl transition-all duration-500 hover:scale-111 md:px-8">
+                        <div className="flex scale-110 flex-col rounded-xl border border-[#0084cc] bg-[#0084cc] p-5 px-5 shadow-xl transition-all duration-500 hover:scale-111 md:px-8">
                             <span className="poppins-semibold my-1 text-xl text-white">
                                 Pro Plan
                             </span>
@@ -73,7 +73,7 @@ const Pricings = () => {
                             <span className="poppins-medium my-2 text-xs text-gray-300">
                                 Best Choice
                             </span>
-                            <button className="poppins-semibold my-3 cursor-pointer rounded-lg border border-2 border-[#4b82ff] bg-white p-1 px-15 text-base text-[#4b82ff] shadow-xl transition-all duration-300 hover:border-white hover:bg-[#4b82ff] hover:text-white">
+                            <button className="poppins-semibold my-3 cursor-pointer rounded-lg border border-2 border-[#0084cc] bg-white p-1 px-15 text-base text-[#0084cc] shadow-xl transition-all duration-300 hover:border-white hover:bg-[#0084cc] hover:text-white">
                                 <a
                                     href="/signup"
                                     target="_blank"
@@ -119,7 +119,7 @@ const Pricings = () => {
                                     /mo
                                 </span>
                             </span>
-                            <button className="poppins-semibold my-5 cursor-pointer rounded-lg border border-2 border-[#4b82ff] bg-[#4b82ff] p-1 px-15 text-base text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-[#4b82ff]">
+                            <button className="poppins-semibold my-5 cursor-pointer rounded-lg border border-2 border-[#0084cc] bg-[#0084cc] p-1 px-15 text-base text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-[#0084cc]">
                                 <a
                                     href="/signup"
                                     target="_blank"
