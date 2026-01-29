@@ -10,7 +10,7 @@ const TermsOfService = () => {
                         <img src={Logo} className="w-full" />
                     </div>
                     <span className="poppins-semibold ml-2 text-xl">
-                        PingMe
+                        PDRS
                     </span>
                 </div>
                 <div className="text-base">

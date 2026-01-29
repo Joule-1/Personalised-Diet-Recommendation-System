@@ -142,7 +142,7 @@ function SignIn() {
                         <img src={Logo} className="w-full" />
                     </div>
                     <span className="poppins-semibold ml-2 text-xl">
-                        PingMe
+                        PDRS
                     </span>
                 </a>
                 <div className="text-xs">
@@ -172,7 +172,7 @@ function SignIn() {
                                 onClick={navigateToHomePage}
                                 className="font-inter cursor-pointer text-2xl font-bold text-gray-900"
                             >
-                                PingMe
+                                PDRS
                             </h1>
                             <p className="mt-1 text-sm text-gray-600">
                                 Welcome back to your workspace

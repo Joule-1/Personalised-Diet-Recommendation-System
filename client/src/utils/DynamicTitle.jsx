@@ -15,8 +15,8 @@ const DynamicTitle = () => {
         };
 
         document.title =
-            `${titleName[location.pathname] === undefined ? "PingMe" : `${titleName[location.pathname]} - PingMe`}` ||
-            "PingMe";
+            `${titleName[location.pathname] === undefined ? "PDRS" : `${titleName[location.pathname]} - PDRS`}` ||
+            "PDRS";
     }, [location.pathname]);
 
     return null;

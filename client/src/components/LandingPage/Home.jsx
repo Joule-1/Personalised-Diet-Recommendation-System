@@ -35,16 +35,14 @@ const Home = () => {
             <div className="flex items-center justify-center pt-20 sm:h-screen sm:pt-0">
                 <div className="flex flex-col items-center">
                     <span className="w-22 rounded-2xl shadow-2xl">
-                        <img src={Logo} className="w-20 mx-auto hover:scale-110" />
+                        <img src={Logo} className="w-20 mx-auto hover:scale-105" />
                     </span>
                     <div className="poppins-bold my-6 text-2xl sm:text-5xl">
-                        Track. Plan.{" "}
-                        <span className="text-[#0084cc]">Succeed.</span>
+                        Nourish. Align.{" "}
+                        <span className="text-[#0084cc]">Ascend.</span>
                     </div>
                     <div className="poppins-semibold px-5 text-center text-sm text-gray-500 sm:text-base">
-                        PingMe isn’t just how you get things done—it’s how you
-                        rise, reign, and rewrite reality with every move you
-                        make.”
+                        It is a convergence where data, discipline, and desire collapse into nourishment — rewriting the body’s logic with every sovereign choice.
                     </div>
                     <button className="poppins-semibold my-6 cursor-pointer rounded-2xl border border-2 border-[#0084cc] bg-[#0084cc] p-2 px-5 text-base text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-[#0084cc]">
                         <a
@@ -66,7 +64,7 @@ const Home = () => {
             <div className="mt-10 mb-5">
                 <div className="poppins-semibold my-5 text-center text-lg sm:text-xl">
                     Join a community of millions of users globally who are using
-                    PingMe to get more done.
+                    PDRS to get more done.
                 </div>
                 <div className="flex justify-center">
                     <img src={BrandIcon} />
@@ -80,7 +78,7 @@ const Home = () => {
                             <img src={Logo} className="w-full" />
                         </div>
                         <span className="poppins-semibold ml-2 text-xl">
-                            PingMe
+                            PDRS
                         </span>
                     </div>
                 </div>
@@ -113,8 +111,6 @@ const Home = () => {
                         <div className="mx-2 mb-4 cursor-pointer hover:text-[#0084cc]">
                             <a
                                 href="/privacy"
-                                target="_blank"
-                                rel="noopener noreferrer"
                             >
                                 Privacy Policy
                             </a>
@@ -122,8 +118,6 @@ const Home = () => {
                         <div className="mx-2 mb-4 cursor-pointer hover:text-[#0084cc]">
                             <a
                                 href="/tos"
-                                target="_blank"
-                                rel="noopener noreferrer"
                             >
                                 Terms of Service
                             </a>
