@@ -1,8 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-    Logo,
-} from "../assets";
+import { Logo } from "../assets";
 import api from "../utils/UserAxios.js";
 
 function SignUp() {
@@ -203,7 +201,7 @@ function SignUp() {
             console.log("Email:", emailRef.current.value);
             console.log("Password:", passwordRef.current.value);
             console.log("Avatar:", selectedAvatar);
-            
+
             const res = await api.post("/register", {
                 name: nameRef.current.value,
                 email: emailRef.current.value,
@@ -240,9 +238,7 @@ function SignUp() {
                     <div className={`w-10 hover:scale-105`}>
                         <img src={Logo} className="w-full" />
                     </div>
-                    <span className="poppins-semibold ml-2 text-xl">
-                        PDRS
-                    </span>
+                    <span className="poppins-semibold ml-2 text-xl">PDRS</span>
                 </a>
                 <div className="text-xs">
                     <span className="text-gray-500">
@@ -551,7 +547,7 @@ function SignUp() {
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full hover:cursor-pointer transform rounded-2xl bg-gradient-to-r from-[#0084cc] to-[#005f99] px-4 py-3 font-medium text-white transition-all duration-300 hover:scale-101 hover:from-[#0084cc] hover:to-[#005f99] focus:ring-4 focus:ring-[#0084cc] active:scale-95"
+                                className="w-full transform rounded-2xl bg-gradient-to-r from-[#0084cc] to-[#005f99] px-4 py-3 font-medium text-white transition-all duration-300 hover:scale-101 hover:cursor-pointer hover:from-[#0084cc] hover:to-[#005f99] focus:ring-4 focus:ring-[#0084cc] active:scale-95"
                                 disabled={loading}
                             >
                                 {loading

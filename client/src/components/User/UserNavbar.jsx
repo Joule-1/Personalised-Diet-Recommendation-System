@@ -18,7 +18,7 @@ const UserNavbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState();
 
-    useEffect(() => { 
+    useEffect(() => {
         const fetchUser = async () => {
             try {
                 const res2 = await api.get("/current-user");
@@ -40,7 +40,7 @@ const UserNavbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             {/* Overlay for mobile */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 z-30 bg-opacity-50 md:hidden"
+                    className="bg-opacity-50 fixed inset-0 z-30 md:hidden"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
@@ -62,23 +62,23 @@ const UserNavbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                     <div className="flex flex-col gap-4 text-gray-700">
                         <Link
                             to="/dashboard"
-                            className={`flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-600 ${location.pathname === "/dashboard" ? "text-blue-500 bg-blue-100" : "text-gray-500 bg-white"}`}
+                            className={`flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-600 ${location.pathname === "/dashboard" ? "bg-blue-100 text-blue-500" : "bg-white text-gray-500"}`}
                         >
                             <LayoutDashboard className="h-5 w-5" />
                             Dashboard
                         </Link>
                         <Link
                             to="/tasks"
-                            className={`flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-600 ${location.pathname === "/tasks" ? "text-blue-500 bg-blue-100" : "text-gray-500 bg-white"}`}
+                            className={`flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-600 ${location.pathname === "/tasks" ? "bg-blue-100 text-blue-500" : "bg-white text-gray-500"}`}
                         >
-                            <BringToFront className="h-5 w-5"/>
+                            <BringToFront className="h-5 w-5" />
                             Task
                         </Link>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-3 border-t pt-4 px-3 text-gray-600">
-                    <div className="h-9 w-9 rounded-full bg-gray-300 overflow-hidden">
+                <div className="flex items-center gap-3 border-t px-3 pt-4 text-gray-600">
+                    <div className="h-9 w-9 overflow-hidden rounded-full bg-gray-300">
                         <img
                             src={userInfo?.avatar}
                             className="h-full w-full object-cover"

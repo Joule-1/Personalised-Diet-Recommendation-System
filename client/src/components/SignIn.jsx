@@ -1,8 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-    Logo,
-} from "../assets";
+import { Logo } from "../assets";
 import api from "../utils/UserAxios.js";
 
 function SignIn() {
@@ -141,9 +139,7 @@ function SignIn() {
                     <div className={`w-10 hover:scale-105`}>
                         <img src={Logo} className="w-full" />
                     </div>
-                    <span className="poppins-semibold ml-2 text-xl">
-                        PDRS
-                    </span>
+                    <span className="poppins-semibold ml-2 text-xl">PDRS</span>
                 </a>
                 <div className="text-xs">
                     <span className="text-gray-500">

@@ -9,15 +9,16 @@ const NavbarHome = () => {
                 <div className={`w-10 hover:scale-105`}>
                     <img src={Logo} className="w-full" />
                 </div>
-                <span className="poppins-semibold ml-2 text-xl" title="Personalised Diet Recommendation System">PDRS</span>
+                <span
+                    className="poppins-semibold ml-2 text-xl"
+                    title="Personalised Diet Recommendation System"
+                >
+                    PDRS
+                </span>
             </a>
             <div className="poppins-semibold flex hidden items-center md:block">
                 <span className="mx-5 cursor-pointer hover:text-[#0084cc] sm:ml-10">
-                    <a
-                        href="/privacy"
-                    >
-                        Privacy
-                    </a>
+                    <a href="/privacy">Privacy</a>
                 </span>
                 <Link
                     to="pricings"
@@ -46,17 +47,13 @@ const NavbarHome = () => {
                     id="NavbarHomeSign"
                     className="ml-5 cursor-pointer hover:text-[#0084cc] sm:ml-5"
                 >
-                    <a href="/signin">
-                        Sign In
-                    </a>
+                    <a href="/signin">Sign In</a>
                 </span>
                 <span
                     id="NavbarHomeSign"
                     className="poppins-semibold ml-2 cursor-pointer rounded-xl border border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc] sm:ml-5"
                 >
-                    <a href="/signup">
-                        Sign Up
-                    </a>
+                    <a href="/signup">Sign Up</a>
                 </span>
             </div>
         </section>

@@ -48,9 +48,7 @@ const Pricings = () => {
                                 <span className="my-2">
                                     ✔ &nbsp;&nbsp;&nbsp;Healthy Guidance
                                 </span>
-                                <span>
-                                    ✔ &nbsp;&nbsp;&nbsp;Daily Balance
-                                </span>
+                                <span>✔ &nbsp;&nbsp;&nbsp;Daily Balance</span>
                             </span>
                         </div>
                         <div className="flex scale-110 flex-col rounded-xl border border-[#0084cc] bg-[#0084cc] p-5 px-5 shadow-xl transition-all duration-500 hover:scale-111 md:px-8">

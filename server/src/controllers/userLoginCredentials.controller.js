@@ -31,28 +31,28 @@ const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, avatarURL } = req.body;
 
     if (
-        [name, email, password, avatarURL].some(
-            (field) => field?.trim() === ""
-        )
+        [name, email, password, avatarURL].some((field) => field?.trim() === "")
     ) {
         throw new ApiError(400, "All fields are required");
     }
 
-    const existedUser = await UserLogin.findOne({email: email});
+    const existedUser = await UserLogin.findOne({ email: email });
 
     if (existedUser)
-        throw new ApiError(409, "UserLogin with email or username already exists");
+        throw new ApiError(
+            409,
+            "UserLogin with email or username already exists"
+        );
 
     const user = await UserLogin.create({
         name,
         email,
         password,
-        avatarURL
-    })
-    
-    if(!user)
-        throw new ApiError(500, "UserLogin is not being created");
-   
+        avatarURL,
+    });
+
+    if (!user) throw new ApiError(500, "UserLogin is not being created");
+
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
         user._id
     );
@@ -77,7 +77,11 @@ const registerUser = asyncHandler(async (req, res) => {
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(
-            new ApiResponse(201, createdUser, "UserLogin Registered Successfully")
+            new ApiResponse(
+                201,
+                createdUser,
+                "UserLogin Registered Successfully"
+            )
         );
 });
 
@@ -95,7 +99,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const isPasswordValid = await user.isPasswordCorrect(password);
 
-    if (!isPasswordValid) throw new ApiError(401, "Invalid UserLogin Credentials");
+    if (!isPasswordValid)
+        throw new ApiError(401, "Invalid UserLogin Credentials");
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
         user._id
@@ -121,7 +126,11 @@ const loginUser = asyncHandler(async (req, res) => {
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(
-            new ApiResponse(200, loggedInUser, "UserLogin logged in successfully")
+            new ApiResponse(
+                200,
+                loggedInUser,
+                "UserLogin logged in successfully"
+            )
         );
 });
 
@@ -154,7 +163,11 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(
-            new ApiResponse(200, req.user, "Current UserLogin Fetched Successfully")
+            new ApiResponse(
+                200,
+                req.user,
+                "Current UserLogin Fetched Successfully"
+            )
         );
 });
 

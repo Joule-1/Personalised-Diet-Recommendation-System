@@ -35,14 +35,19 @@ const Home = () => {
             <div className="flex items-center justify-center pt-20 sm:h-screen sm:pt-0">
                 <div className="flex flex-col items-center">
                     <span className="w-22 rounded-2xl shadow-2xl">
-                        <img src={Logo} className="w-20 mx-auto hover:scale-105" />
+                        <img
+                            src={Logo}
+                            className="mx-auto w-20 hover:scale-105"
+                        />
                     </span>
                     <div className="poppins-bold my-6 text-2xl sm:text-5xl">
                         Nourish. Align.{" "}
                         <span className="text-[#0084cc]">Ascend.</span>
                     </div>
                     <div className="poppins-semibold px-5 text-center text-sm text-gray-500 sm:text-base">
-                        It is a convergence where data, discipline, and desire collapse into nourishment — rewriting the body’s logic with every sovereign choice.
+                        It is a convergence where data, discipline, and desire
+                        collapse into nourishment — rewriting the body’s logic
+                        with every sovereign choice.
                     </div>
                     <button className="poppins-semibold my-6 cursor-pointer rounded-2xl border border-2 border-[#0084cc] bg-[#0084cc] p-2 px-5 text-base text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-[#0084cc]">
                         <a
@@ -109,18 +114,10 @@ const Home = () => {
                     </div>
                     <div className="my-5 flex flex-wrap justify-center">
                         <div className="mx-2 mb-4 cursor-pointer hover:text-[#0084cc]">
-                            <a
-                                href="/privacy"
-                            >
-                                Privacy Policy
-                            </a>
+                            <a href="/privacy">Privacy Policy</a>
                         </div>
                         <div className="mx-2 mb-4 cursor-pointer hover:text-[#0084cc]">
-                            <a
-                                href="/tos"
-                            >
-                                Terms of Service
-                            </a>
+                            <a href="/tos">Terms of Service</a>
                         </div>
                         <div className="mx-2 cursor-pointer hover:text-[#0084cc]">
                             <Link

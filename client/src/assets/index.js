@@ -47,5 +47,5 @@ export {
     TestimoniaIcon3,
     TestimoniaIcon2,
     TestimoniaIcon1,
-    BrandIcon
+    BrandIcon,
 };

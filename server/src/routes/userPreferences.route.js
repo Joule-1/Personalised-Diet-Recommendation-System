@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
-    registerUserPreferences
+    upsertUserPreferences,
+    getCurrentPreferences,
 } from "../controllers/userPreferences.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -10,7 +11,7 @@ const router = Router({
 });
 
 //  Secured routes
-router.route("/registerUserPreferences").get(verifyJWT, registerUserPreferences);
+router.route("/registerUserPreferences").put(verifyJWT, upsertUserPreferences);
+router.route("/getCurrentPreferences").get(verifyJWT, getCurrentPreferences);
 
-
-export default router; 
+export default router;

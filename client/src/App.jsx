@@ -10,7 +10,7 @@ import NotFound from "./components/NotFound.jsx";
 import DynamicTitle from "./utils/DynamicTitle.jsx";
 
 const AppWrapper = () => {
-    return ( 
+    return (
         <>
             <DynamicTitle />
             <Routes>

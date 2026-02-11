@@ -34,4 +34,3 @@ app.use("/api/v1/user", userRouter);
 app.use(errorHandler);
 
 export { app };
-  
