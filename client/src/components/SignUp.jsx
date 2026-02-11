@@ -199,17 +199,16 @@ function SignUp() {
         setLoading(true);
 
         try {
-            console.log("Register form submitted");
             console.log("Name:", nameRef.current.value);
             console.log("Email:", emailRef.current.value);
             console.log("Password:", passwordRef.current.value);
             console.log("Avatar:", selectedAvatar);
-
+            
             const res = await api.post("/register", {
                 name: nameRef.current.value,
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
-                avatar: selectedAvatar,
+                avatarURL: selectedAvatar,
             });
 
             console.log(res);

@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { User } from "../models/user.model.js";
+import { User } from "../models/userLoginCredentials.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
@@ -28,64 +28,31 @@ const generateAccessAndRefreshTokens = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { fullname, email, username, password } = req.body;
+    const { name, email, password, avatarURL } = req.body;
 
     if (
-        [fullname, email, username, password].some(
+        [name, email, password, avatarURL].some(
             (field) => field?.trim() === ""
         )
     ) {
         throw new ApiError(400, "All fields are required");
     }
 
-    const existedUser = await User.findOne({
-        $or: [{ username }, { email }],
-    });
+    const existedUser = await User.findOne({email: email});
 
     if (existedUser)
         throw new ApiError(409, "User with email or username already exists");
 
-    const avatarLocalPath = req.files?.avatar[0]?.path;
-
-    let coverImageLocalPath;
-    if (
-        req.files &&
-        Array.isArray(req.files.coverImage) &&
-        req.files.coverImage.length > 0
-    )
-        coverImageLocalPath = req.files.coverImage[0].path;
-
-    if (!avatarLocalPath) throw new ApiError(400, "Avatar file is required");
-
-    const avatar = await uploadOnCloudinary(avatarLocalPath);
-    let coverImage;
-    if (coverImageLocalPath) {
-        coverImage = await uploadOnCloudinary(coverImageLocalPath);
-    }
-
-    if (!avatar) throw new ApiError(500, "Error in uploading file");
-
-    if (!avatar?.secure_url)
-        throw new ApiError(500, "Failed to get avatar URL");
-
-    let user;
-    try {
-        user = await User.create({
-            username,
-            email,
-            fullname,
-            avatar: avatar?.secure_url,
-            coverImage: coverImage?.secure_url || "",
-            password,
-        });
-    } catch (err) {
-        if (err.name === "ValidationError") {
-            const firstError = Object.values(err.errors)[0].message;
-            throw new ApiError(400, firstError); // e.g., "Invalid password"
-        }
-        throw new ApiError(500, "Failed to create user in DB");
-    }
-
+    const user = await User.create({
+        name,
+        email,
+        password,
+        avatarURL
+    })
+    
+    if(!user)
+        throw new ApiError(500, "User is not being created");
+   
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
         user._id
     );
@@ -254,15 +221,15 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
-    const { fullname, email } = req.body;
+    const { name, email } = req.body;
 
-    if (!fullname || !email) throw new ApiError(400, "All fields are required");
+    if (!name || !email) throw new ApiError(400, "All fields are required");
 
     const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
             $set: {
-                fullname,
+                name,
                 email,
             },
         },
@@ -432,7 +399,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         },
         {
             $project: {
-                fullname: true,
+                name: true,
                 username: true,
                 email: true,
                 avatar: true,
@@ -480,7 +447,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
                             pipeline: [
                                 {
                                     $project: {
-                                        fullname: true,
+                                        name: true,
                                         username: true,
                                         avatar: true,
                                     },
