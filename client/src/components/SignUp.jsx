@@ -260,7 +260,7 @@ function SignUp() {
             >
                 <section id="login-form" className="relative w-full max-w-md">
                     {/* Login Card */}
-                    <div className="relative z-10 rounded-3xl border border-blue-100 bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-xl">
+                    <div className="relative z-10 rounded-3xl border border-[#0084cc] bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-xl">
                         {/* Logo/Brand */}
                         <div className="mb-4 text-center">
                             <div
@@ -298,7 +298,7 @@ function SignUp() {
                                         autoComplete="off"
                                         name="name"
                                         ref={nameRef}
-                                        className={`w-full border px-4 py-3 text-sm outline-none ${errors.name ? "border-red-500" : "border-gray-200"} rounded-2xl bg-gray-50 transition-all duration-300 focus:border-transparent focus:bg-white focus:ring-2 focus:ring-blue-500`}
+                                        className={`w-full border px-4 py-3 text-sm outline-none ${errors.name ? "border-red-500" : "border-gray-200"} rounded-2xl bg-gray-50 transition-all duration-300 focus:border-transparent focus:bg-white focus:ring-2 focus:ring-[#0084cc]`}
                                         placeholder="Enter your name"
                                         onChange={() =>
                                             setErrors((prev) => ({
@@ -352,8 +352,8 @@ function SignUp() {
                                                     className={`h-12 w-12 rounded-full border-2 transition-colors ${
                                                         selectedAvatar ===
                                                         avatar.url
-                                                            ? "border-blue-500"
-                                                            : "border-gray-200 hover:border-blue-300"
+                                                            ? "border-[#0084cc]"
+                                                            : "border-gray-200 hover:border-[#005f99]"
                                                     }`}
                                                 />
                                             </label>
@@ -382,7 +382,7 @@ function SignUp() {
                                         autoComplete="off"
                                         name="email"
                                         ref={emailRef}
-                                        className={`w-full border px-4 py-3 text-sm outline-none ${errors.email ? "border-red-500" : "border-gray-200"} rounded-2xl bg-gray-50 transition-all duration-300 focus:border-transparent focus:bg-white focus:ring-2 focus:ring-blue-500`}
+                                        className={`w-full border px-4 py-3 text-sm outline-none ${errors.email ? "border-red-500" : "border-gray-200"} rounded-2xl bg-gray-50 transition-all duration-300 focus:border-transparent focus:bg-white focus:ring-2 focus:ring-[#0084cc]`}
                                         placeholder="Enter your email"
                                         onChange={() =>
                                             setErrors((prev) => ({
@@ -428,7 +428,7 @@ function SignUp() {
                                         id="password"
                                         name="password"
                                         ref={passwordRef}
-                                        className={`w-full border px-4 py-3 text-sm outline-none ${errors.password ? "border-red-500" : "border-gray-200"} rounded-2xl bg-gray-50 pr-12 transition-all duration-300 focus:border-transparent focus:bg-white focus:ring-2 focus:ring-blue-500`}
+                                        className={`w-full border px-4 py-3 text-sm outline-none ${errors.password ? "border-red-500" : "border-gray-200"} rounded-2xl bg-gray-50 pr-12 transition-all duration-300 focus:border-transparent focus:bg-white focus:ring-2 focus:ring-[#0084cc]`}
                                         placeholder="Enter your password"
                                         onChange={() =>
                                             setErrors((prev) => ({
@@ -552,7 +552,7 @@ function SignUp() {
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full transform rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-3 font-medium text-white transition-all duration-300 hover:scale-101 hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-200 active:scale-95"
+                                className="w-full hover:cursor-pointer transform rounded-2xl bg-gradient-to-r from-[#0084cc] to-[#005f99] px-4 py-3 font-medium text-white transition-all duration-300 hover:scale-101 hover:from-[#0084cc] hover:to-[#005f99] focus:ring-4 focus:ring-[#0084cc] active:scale-95"
                                 disabled={loading}
                             >
                                 {loading
@@ -567,7 +567,7 @@ function SignUp() {
                                 Already Registered?
                                 <a
                                     href="/signin"
-                                    className="font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700"
+                                    className="font-medium text-[#0084cc] transition-colors duration-200 hover:text-[#005f99]"
                                 >
                                     {" "}
                                     Login

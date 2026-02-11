@@ -149,7 +149,7 @@ function SignIn() {
                     <span className="text-gray-500">
                         Don't have an account?
                     </span>
-                    <button className="poppins-semibold ml-2 cursor-pointer rounded-xl border-2 bg-blue-500 p-2 text-white hover:border-blue-500 hover:bg-white hover:text-blue-500">
+                    <button className="poppins-semibold ml-2 cursor-pointer rounded-xl border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc]">
                         <Link to="/signup">Sign Up</Link>
                     </button>
                 </div>
@@ -160,7 +160,7 @@ function SignIn() {
                     id="login-form"
                     className="relative mx-auto mt-10 w-full max-w-md"
                 >
-                    <div className="relative z-10 rounded-3xl border border-blue-100 bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-xl">
+                    <div className="relative z-10 rounded-3xl border border-[#0084cc] bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-xl">
                         <div className="mb-5 text-center">
                             <div
                                 onClick={navigateToHomePage}
@@ -224,7 +224,7 @@ function SignIn() {
                                         onChange={() =>
                                             handleInputChange("email")
                                         }
-                                        className={`w-full rounded-2xl border bg-gray-50 px-4 py-3 text-sm transition-all duration-300 outline-none focus:border-transparent focus:bg-white focus:ring-2 focus:ring-blue-500 ${
+                                        className={`w-full rounded-2xl border bg-gray-50 px-4 py-3 text-sm transition-all duration-300 outline-none focus:border-transparent focus:bg-white focus:ring-2 focus:ring-[#0084cc] ${
                                             fieldErrors.email
                                                 ? "border-red-300 bg-red-50"
                                                 : "border-gray-200"
@@ -272,7 +272,7 @@ function SignIn() {
                                         onChange={() =>
                                             handleInputChange("password")
                                         }
-                                        className={`w-full rounded-2xl border bg-gray-50 px-4 py-3 pr-12 text-sm transition-all duration-300 outline-none focus:border-transparent focus:bg-white focus:ring-2 focus:ring-blue-500 ${
+                                        className={`w-full rounded-2xl border bg-gray-50 px-4 py-3 pr-12 text-sm transition-all duration-300 outline-none focus:border-transparent focus:bg-white focus:ring-2 focus:ring-[#0084cc] ${
                                             fieldErrors.password
                                                 ? "border-red-300 bg-red-50"
                                                 : "border-gray-200"
@@ -331,7 +331,7 @@ function SignIn() {
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full transform rounded-2xl bg-blue-500 bg-gradient-to-r px-4 py-3 font-medium text-white transition-all duration-300 hover:scale-101 hover:bg-blue-600 focus:ring-4 focus:ring-blue-200 active:scale-95 disabled:transform-none disabled:cursor-not-allowed disabled:opacity-50"
+                                className="w-full transform rounded-2xl bg-[#0084cc] bg-gradient-to-r px-4 py-3 font-medium text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#0084cc] focus:ring-4 focus:ring-[#0084cc] active:scale-95 disabled:transform-none disabled:cursor-not-allowed disabled:opacity-50"
                                 disabled={loading}
                             >
                                 {loading ? (
@@ -370,7 +370,7 @@ function SignIn() {
                                 New here?
                                 <Link
                                     to={"/signup"}
-                                    className="font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700"
+                                    className="font-medium text-[#0084cc] transition-colors duration-200 hover:text-[#005f99]"
                                 >
                                     {" "}
                                     Register Now
