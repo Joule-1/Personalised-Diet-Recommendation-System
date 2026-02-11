@@ -3,7 +3,7 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const userSchema = new Schema(
+const userLoginSchema = new Schema(
     {
         name: {
             type: String,
@@ -52,17 +52,17 @@ const userSchema = new Schema(
     }
 );
 
-userSchema.pre("save", async function (next) {
+userLoginSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
     this.password = await bcrypt.hash(this.password, 10); // encrypt password with HS256 algo 10 rounds
     next();
 });
 
-userSchema.methods.isPasswordCorrect = async function (password) {
+userLoginSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateAccessToken = function () {
+userLoginSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -76,7 +76,7 @@ userSchema.methods.generateAccessToken = function () {
     );
 };
 
-userSchema.methods.generateRefreshToken = function () {
+userLoginSchema.methods.generateRefreshToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -89,6 +89,6 @@ userSchema.methods.generateRefreshToken = function () {
     );
 };
 
-const User = mongoose.model("User", userSchema);
+const UserLogin = mongoose.model("UserLogin", userLoginSchema);
 
-export { User };
+export { UserLogin };
