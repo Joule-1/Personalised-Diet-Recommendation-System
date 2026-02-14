@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../assets";
-import api from "../utils/UserAxios.js";
+import { userLoginAPI } from "../utils/UserLoginAxios.js";
+import { userPreferencesAPI } from "../utils/UserPreferencesAxios.js";
 
 function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
@@ -63,14 +64,17 @@ function SignIn() {
         setLoading(true);
 
         try {
-            const res = await api.post("/login", {
+            const res = await userLoginAPI.post("/login", {
                 email: emailRef.current.value.trim(),
                 password: passwordRef.current.value.trim(),
             });
 
             if (res.data.success) {
-                const res2 = await api.get("/current-user");
-                console.log(res2);
+                const checkUserPreferences = await userPreferencesAPI.get(
+                    "/getCurrentPreferences"
+                );
+                console.log("Logged in user:", res.data.data);
+                console.log(checkUserPreferences.data.data);
                 navigate("/dashboard");
             } else {
                 setError(res.data.message || "Login failed. Please try again.");

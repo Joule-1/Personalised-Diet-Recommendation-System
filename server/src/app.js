@@ -27,9 +27,11 @@ app.use(
     })
 );
 
-import userRouter from "./routes/userLoginCredentials.route.js";
+import userLoginRouter from "./routes/userLoginCredentials.route.js";
+import userPreferencesRouter from "./routes/userPreferences.route.js";
 
-app.use("/api/v1/user", userRouter);
+app.use("/api/v1/user", userLoginRouter);
+app.use("/api/v1/userPreferences", userPreferencesRouter);
 
 app.use(errorHandler);
 

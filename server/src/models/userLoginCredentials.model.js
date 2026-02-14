@@ -52,15 +52,15 @@ const userLoginSchema = new Schema(
     }
 );
 
-userLoginSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
-    this.password = await bcrypt.hash(this.password, 10); // encrypt password with HS256 algo 10 rounds
-    next();
-});
+// userLoginSchema.pre("save", async function (next) {
+//     if (!this.isModified("password")) return next();
+//     this.password = await bcrypt.hash(this.password, 10); // encrypt password with HS256 algo 10 rounds
+//     next();
+// });
 
-userLoginSchema.methods.isPasswordCorrect = async function (password) {
-    return await bcrypt.compare(password, this.password);
-};
+// userLoginSchema.methods.isPasswordCorrect = async function (password) {
+//     return await bcrypt.compare(password, this.password);
+// };
 
 userLoginSchema.methods.generateAccessToken = function () {
     return jwt.sign(

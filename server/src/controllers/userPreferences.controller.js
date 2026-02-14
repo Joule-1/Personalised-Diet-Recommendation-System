@@ -4,11 +4,19 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { UserPreferences } from "../models/userPreferences.model.js";
 
 const upsertUserPreferences = asyncHandler(async (req, res) => {
-    const { conditions, mealType, foodGroup, dietPreference } = req.body;
-
-    if (!req.user?._id) {
-        throw new ApiError(401, "Unauthorized user");
-    }
+    if (!req.body) throw new ApiError(400, "Empty Request");
+    console.log(req.body);
+    const {
+        conditions,
+        mealType,
+        foodGroup,
+        dietPreference,
+        activityLevel,
+        age,
+        gender,
+        height,
+        weight,
+    } = req.body;
 
     if (!conditions || !Array.isArray(conditions) || conditions.length === 0) {
         throw new ApiError(400, "At least one condition is required");
@@ -29,6 +37,11 @@ const upsertUserPreferences = asyncHandler(async (req, res) => {
             mealType,
             foodGroup,
             dietPreference,
+            activityLevel,
+            age,
+            gender,
+            height,
+            weight,
         },
         {
             new: true,
@@ -57,17 +70,15 @@ const getCurrentPreferences = asyncHandler(async (req, res) => {
         user: req.user._id,
     });
 
-    if (!currentPreferences) {
-        throw new ApiError(404, "Preferences not found");
-    }
-
     return res
         .status(201)
         .json(
             new ApiResponse(
                 201,
                 currentPreferences,
-                "Current Preferences Fetched Successfully"
+                currentPreferences
+                    ? "Current Preferences Fetched Successfully"
+                    : "No User Preferences Registered"
             )
         );
 });

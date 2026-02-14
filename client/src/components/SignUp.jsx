@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../assets";
-import api from "../utils/UserAxios.js";
+import { userLoginAPI } from "../utils/UserLoginAxios.js";
 
 function SignUp() {
     const [showPassword, setShowPassword] = useState(false);
@@ -202,7 +202,7 @@ function SignUp() {
             console.log("Password:", passwordRef.current.value);
             console.log("Avatar:", selectedAvatar);
 
-            const res = await api.post("/register", {
+            const res = await userLoginAPI.post("/register", {
                 name: nameRef.current.value,
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
@@ -213,7 +213,7 @@ function SignUp() {
             console.log(res.data.success);
 
             if (res.data.success) {
-                const res2 = await api.get("/current-user");
+                const res2 = await userLoginAPI.get("/current-user");
                 console.log(res2);
                 navigate("/dashboard");
             }
@@ -565,7 +565,7 @@ function SignUp() {
                                     className="font-medium text-[#0084cc] transition-colors duration-200 hover:text-[#005f99]"
                                 >
                                     {" "}
-                                    Login
+                                    Sign In
                                 </a>
                             </p>
                         </div>
