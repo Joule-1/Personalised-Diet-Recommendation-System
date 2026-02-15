@@ -75,7 +75,7 @@ function SignIn() {
                 );
                 console.log("Logged in user:", res.data.data);
                 console.log(checkUserPreferences.data.data);
-                navigate("/dashboard");
+                navigate("/userPreferencesCollector");
             } else {
                 setError(res.data.message || "Login failed. Please try again.");
             }
@@ -138,22 +138,6 @@ function SignIn() {
 
     return (
         <section className="">
-            <div className="top-0 flex h-15 w-full place-content-between items-center bg-white px-10 shadow-md">
-                <a className="flex items-center" href="/home">
-                    <div className={`w-10 hover:scale-105`}>
-                        <img src={Logo} className="w-full" />
-                    </div>
-                    <span className="poppins-semibold ml-2 text-xl">PDRS</span>
-                </a>
-                <div className="text-xs">
-                    <span className="text-gray-500">
-                        Don't have an account?
-                    </span>
-                    <button className="poppins-semibold ml-2 cursor-pointer rounded-xl border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc]">
-                        <Link to="/signup">Sign Up</Link>
-                    </button>
-                </div>
-            </div>
             <div id="root" className="">
                 {" "}
                 <section

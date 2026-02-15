@@ -215,7 +215,7 @@ function SignUp() {
             if (res.data.success) {
                 const res2 = await userLoginAPI.get("/current-user");
                 console.log(res2);
-                navigate("/dashboard");
+                navigate("/userPreferencesCollector");
             }
         } catch (error) {
             console.error("Registration error:", error);

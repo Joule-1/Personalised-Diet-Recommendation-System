@@ -17,26 +17,6 @@ const userPreferencesSchema = new Schema(
             index: true,
         },
 
-        mealType: {
-            type: String,
-            enum: ["breakfast", "lunch", "dinner", "snack", "beverage"],
-            required: true,
-        },
-
-        foodGroup: {
-            type: String,
-            enum: [
-                "fruit",
-                "cereal",
-                "protein",
-                "fat",
-                "dairy",
-                "vegetable",
-                "beverage",
-            ],
-            required: true,
-        },
-
         dietPreference: {
             type: String,
             enum: ["veg", "egg", "non_veg"],

@@ -1,5 +1,4 @@
 import React from "react";
-import NavbarHome from "./NavbarHome";
 import {
     Logo,
     HomeCalendarIcon1,
@@ -20,7 +19,6 @@ const Home = () => {
     const currentYear = new Date().getFullYear();
     return (
         <section>
-            <NavbarHome />
             <div>
                 <div className="absolute hidden sm:top-20 sm:left-5 sm:block sm:w-40">
                     <img src={HomeCalendarIcon1} className="w-full" />

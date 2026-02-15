@@ -5,11 +5,9 @@ import { UserPreferences } from "../models/userPreferences.model.js";
 
 const upsertUserPreferences = asyncHandler(async (req, res) => {
     if (!req.body) throw new ApiError(400, "Empty Request");
-    console.log(req.body);
+
     const {
         conditions,
-        mealType,
-        foodGroup,
         dietPreference,
         activityLevel,
         age,
@@ -23,19 +21,16 @@ const upsertUserPreferences = asyncHandler(async (req, res) => {
     }
 
     if (
-        [mealType, foodGroup, dietPreference].some(
-            (field) => typeof field !== "string" || field.trim() === ""
+         typeof dietPreference !== "string" || dietPreference.trim() === ""
         )
-    ) {
-        throw new ApiError(400, "All fields are required");
+     {
+        throw new ApiError(400, "Diet Preference is required");
     }
 
     const savedPreferences = await UserPreferences.findOneAndUpdate(
         { user: req.user._id },
         {
             conditions,
-            mealType,
-            foodGroup,
             dietPreference,
             activityLevel,
             age,

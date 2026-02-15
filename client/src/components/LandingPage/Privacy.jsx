@@ -4,19 +4,6 @@ import { Logo } from "../../assets";
 const Privacy = () => {
     return (
         <section>
-            <div className="top-0 flex h-15 w-full items-center bg-white px-10 shadow-md">
-                <div className="flex items-center">
-                    <div className={`w-10 hover:scale-105`}>
-                        <img src={Logo} className="w-full" />
-                    </div>
-                    <span className="poppins-semibold ml-2 text-xl">PDRS</span>
-                </div>
-                <div className="text-base">
-                    <span className="text-gray-400">
-                        &nbsp;&nbsp;&nbsp;&nbsp;Privacy Policy
-                    </span>
-                </div>
-            </div>
             <div className="mx-auto flex w-[80%] flex-col">
                 <div className="poppins-bold py-10 text-4xl">
                     Privacy Policy
