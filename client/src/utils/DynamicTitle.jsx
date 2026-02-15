@@ -7,7 +7,6 @@ const DynamicTitle = () => {
     useEffect(() => {
         const titleName = {
             "/": "Home",
-            "/home": "Home",
             "/signin": "SignIn",
             "/signup": "SignUp",
             "/privacy": "Privacy Policy",

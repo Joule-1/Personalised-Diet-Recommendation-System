@@ -1,6 +1,6 @@
 import "./App.css";
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter, Routes, Route, replace } from "react-router-dom";
 import Home from "./components/LandingPage/Home.jsx";
 import SignIn from "./components/SignIn.jsx";
 import SignUp from "./components/SignUp.jsx";
@@ -12,16 +12,19 @@ import UserPreferencesCollector from "./components/UserPreferencesCollector.jsx"
 import Navbar from "./components/Navbar.jsx";
 import Pricings from "./components/LandingPage/Pricings.jsx";
 import Testimonials from "./components/LandingPage/Testimonials.jsx";
-import { checkActiveUser } from "./utils/IsLogin.js";
+import { AuthContext } from "./utils/AuthContext.jsx";
+import { Navigate } from "react-router-dom";
 
 const AppWrapper = () => {
+    const {user, setUser} = useContext(AuthContext)
     return (
         <>
             <Navbar />
             <DynamicTitle />
             <Routes>
-                <Route path="/" element={(checkActiveUser() ? <UserPreferencesCollector /> : <Home />)} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={
+                    user ? (<Navigate to = "/dashboard" replace />) : (<Home />)
+                } />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/privacy" element={<Privacy />} />
@@ -29,7 +32,7 @@ const AppWrapper = () => {
                 <Route path="/testimonials" element={<Testimonials />} />
                 <Route path="/tos" element={<TermsOfService />} />
                 <Route
-                    path="/userPreferencesCollector"
+                    path="/dashboard"
                     element={<UserPreferencesCollector />}
                 />
                 <Route path="*" element={<NotFound />} />
