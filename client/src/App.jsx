@@ -16,15 +16,18 @@ import { AuthContext } from "./utils/AuthContext.jsx";
 import { Navigate } from "react-router-dom";
 
 const AppWrapper = () => {
-    const {user, setUser} = useContext(AuthContext)
+    const { user, setUser } = useContext(AuthContext);
     return (
         <>
             <Navbar />
             <DynamicTitle />
             <Routes>
-                <Route path="/" element={
-                    user ? (<Navigate to = "/dashboard" replace />) : (<Home />)
-                } />
+                <Route
+                    path="/"
+                    element={
+                        user ? <Navigate to="/dashboard" replace /> : <Home />
+                    }
+                />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/privacy" element={<Privacy />} />

@@ -20,10 +20,7 @@ const upsertUserPreferences = asyncHandler(async (req, res) => {
         throw new ApiError(400, "At least one condition is required");
     }
 
-    if (
-         typeof dietPreference !== "string" || dietPreference.trim() === ""
-        )
-     {
+    if (typeof dietPreference !== "string" || dietPreference.trim() === "") {
         throw new ApiError(400, "Diet Preference is required");
     }
 

@@ -23,7 +23,7 @@ const Navbar = () => {
     };
 
     return (
-        <section className="z-50 flex h-15 w-full items-center bg-white px-5 text-sm shadow-lg place-content-between">
+        <section className="z-50 flex h-15 w-full place-content-between items-center bg-white px-5 text-sm shadow-lg">
             <a className="flex items-center" href="/">
                 <div className={`w-10 hover:scale-105`}>
                     <img src={Logo} className="w-full" />
@@ -36,14 +36,14 @@ const Navbar = () => {
                 </span>
             </a>
 
-            <div className="poppins-semibold flex items-center md:block absolute left-1/2 -translate-x-1/2">
+            <div className="poppins-semibold absolute left-1/2 flex -translate-x-1/2 items-center md:block">
                 <span
                     className={`mx-5 cursor-pointer hover:text-[#0084cc] ${location.pathname === "/privacy" ? "text-[#0084cc]" : ""}`}
                 >
                     <a href="/privacy">Privacy</a>
                 </span>
                 <span
-                    className={`mx-5 cursor-pointer hover:text-[#0084cc]  ${location.pathname === "/tos" ? "text-[#0084cc]" : ""}`}
+                    className={`mx-5 cursor-pointer hover:text-[#0084cc] ${location.pathname === "/tos" ? "text-[#0084cc]" : ""}`}
                 >
                     <a href="/tos">Terms of Service</a>
                 </span>
@@ -60,7 +60,7 @@ const Navbar = () => {
                     </Link>
                 ) : (
                     <a
-                        className={`mx-5 cursor-pointer hover:text-[#0084cc]  ${location.pathname === "/pricing" ? "text-[#0084cc]" : ""}`}
+                        className={`mx-5 cursor-pointer hover:text-[#0084cc] ${location.pathname === "/pricing" ? "text-[#0084cc]" : ""}`}
                         href="/pricing"
                     >
                         Pricing
@@ -87,39 +87,45 @@ const Navbar = () => {
                     </a>
                 )}
             </div>
-            {!currentUserName && !currentUserAvatar && location.pathname === "/"  && (
-                <div className="flex items-center">
-                    <a
-                        href="/signin"
-                        id="NavbarHomeSign"
-                        className="ml-5 cursor-pointer hover:text-[#0084cc] sm:ml-5"
-                    >
-                        <span>Sign In</span>
-                    </a>
-                    <a
-                    href="/signup"
-                        id="NavbarHomeSign"
-                        className="poppins-semibold ml-2 cursor-pointer rounded-xl border border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc] sm:ml-5"
-                    >
-                        <span >Sign Up</span>
-                    </a>
-                </div>
-            )}
+            {!currentUserName &&
+                !currentUserAvatar &&
+                location.pathname === "/" && (
+                    <div className="flex items-center">
+                        <a
+                            href="/signin"
+                            id="NavbarHomeSign"
+                            className="ml-5 cursor-pointer hover:text-[#0084cc] sm:ml-5"
+                        >
+                            <span>Sign In</span>
+                        </a>
+                        <a
+                            href="/signup"
+                            id="NavbarHomeSign"
+                            className="poppins-semibold ml-2 cursor-pointer rounded-xl border border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc] sm:ml-5"
+                        >
+                            <span>Sign Up</span>
+                        </a>
+                    </div>
+                )}
 
             {location.pathname === "/signin" && !user && (
                 <a className="text-xs" href="/signup">
-                    <span className="text-gray-500 mr-2">
+                    <span className="mr-2 text-gray-500">
                         Don't have an account?
-                    </span> 
-                    <span className="poppins-semibold cursor-pointer p-2 rounded-xl border-2 bg-[#0084cc] text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc]">Sign Up</span>
+                    </span>
+                    <span className="poppins-semibold cursor-pointer rounded-xl border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc]">
+                        Sign Up
+                    </span>
                 </a>
             )}
             {location.pathname === "/signup" && !user && (
                 <a className="text-xs" href="/signin">
                     <span className="text-gray-500">
                         Already have an account?
-                    </span> 
-                    <span className="poppins-semibold ml-2 cursor-pointer rounded-xl border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc]">Sign In</span>
+                    </span>
+                    <span className="poppins-semibold ml-2 cursor-pointer rounded-xl border-2 bg-[#0084cc] p-2 text-white hover:border-[#0084cc] hover:bg-white hover:text-[#0084cc]">
+                        Sign In
+                    </span>
                 </a>
             )}
             {currentUserName && currentUserAvatar && (
