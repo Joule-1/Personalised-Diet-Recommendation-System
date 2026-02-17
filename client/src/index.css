@@ -117,23 +117,14 @@
     font-weight: 900;
     font-style: italic;
 }
-
-@media only screen and (max-width: 400px) {
-    #NavbarHomeSign {
-        font-size: x-small;
-    }
+/* Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-@media only screen and (max-width: 350px) {
-    #NavbarHomeSign {
-        font-size: xx-small;
-    }
-}
-
-.react-calendar__tile.bg-blue-100 {
-    background-color: #dbeafe !important;
-}
-.react-calendar__tile--active {
-    background-color: #3b82f6 !important;
-    color: white !important;
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
 }

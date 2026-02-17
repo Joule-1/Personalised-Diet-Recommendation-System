@@ -2,7 +2,7 @@ import React from "react";
 
 const NotFound = () => {
     return (
-        <section className="text-center font-medium -translate-x-1/2 left-1/2 top-1/2 -translate-y-1/2">
+        <section className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-medium">
             404!!! Page Not Found
         </section>
     );
