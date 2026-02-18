@@ -47,152 +47,483 @@ const UserPreferencesCollector = () => {
             active: 1.725,
             very_active: 1.9,
         };
-        console.log(activityLevel)
-        console.log(multipliers[activityLevel.value])
+        console.log(activityLevel);
+        console.log(multipliers[activityLevel.value]);
         return Math.round(bmr * multipliers[activityLevel.value]);
     }, [bmr, activityLevel]);
 
-// BMI	Category
-// < 18.5	Underweight
-// 18.5 – 24.9	Normal
-// 25 – 29.9	Overweight
-// 30 – 34.9	Obese Class I
-// 35 – 39.9	Obese Class II
-// ≥ 40	Obese Class III
+    // BMI	Category (12-50)
+    // < 18.5	Underweight
+    // 18.5 – 24.9	Normal
+    // 25 – 29.9	Overweight
+    // 30 – 34.9	Obese Class I
+    // 35 – 39.9	Obese Class II
+    // ≥ 40	Obese Class III
 
-// Women
-// Category	BMR
-// Low	< 1200
-// Normal	1200 – 1600
-// High	> 1600
-// Men
-// Category	BMR
-// Low	< 1400
-// Normal	1400 – 1900
-// High	> 1900
+    // Women (800-4000)
+    // Category	BMR
+    // Low	< 1200
+    // Normal	1200 – 1600
+    // High	> 1600
+    // Men
+    // Category	BMR
+    // Low	< 1400
+    // Normal	1400 – 1900
+    // High	> 1900
 
-// Very high BMR often = muscular / large body mass.
+    // Very high BMR often = muscular / large body mass.
 
-// By Calorie Level
-// TDEE	Meaning
-// < 1500	Very low expenditure
-// 1500 – 2200	Light/moderate
-// 2200 – 3000	Active
-// 3000 – 4000	Highly active
-// > 4000	Athlete-level
+    // By Calorie Level (1200-5000)
+    // TDEE	Meaning
+    // < 1500	Very low expenditure
+    // 1500 – 2200	Light/moderate
+    // 2200 – 3000	Active
+    // 3000 – 4000	Highly active
+    // > 4000	Athlete-level
+    const handleBMIColor = (bmiValue) => {
+        if (bmiValue < 18.5) {
+            return "text-gray-400";
+        } else if (bmiValue >= 18.5 && bmiValue <= 24.9) {
+            return "text-green-400";
+        } else if (bmiValue >= 25 && bmiValue <= 29.9) {
+            return "text-yellow-400";
+        } else if (bmiValue >= 30 && bmiValue <= 34.9) {
+            return "text-orange-400";
+        } else if (bmiValue >= 35 && bmiValue <= 39.9) {
+            return "text-red-400";
+        } else if (bmiValue >= 40) {
+            return "text-red-800";
+        }
+    };
+    const handleBMRColor = (bmrValue) => {
+        if (gender.value == "male") {
+            if (bmrValue < 1400) {
+                return "text-gray-400";
+            } else if (bmrValue >= 1400 && bmrValue <= 1900) {
+                return "text-green-400";
+            } else if (bmrValue > 1900) {
+                return "text-red-400";
+            }
+        } else {
+            if (bmrValue < 1200) {
+                return "text-gray-400";
+            } else if (bmrValue >= 1200 && bmrValue <= 1600) {
+                return "text-green-400";
+            } else if (bmrValue > 1600) {
+                return "text-red-400";
+            }
+        }
+    };
+    const handleTDEEColor = (tdeeValue) => {
+        if (tdeeValue < 1500) {
+            return "text-gray-400";
+        } else if (tdeeValue >= 1500 && tdeeValue <= 2200) {
+            return "text-yellow-400";
+        } else if (tdeeValue >= 2200 && tdeeValue <= 3000) {
+            return "text-green-400";
+        } else if (tdeeValue >= 3000 && tdeeValue <= 4000) {
+            return "text-orange-400";
+        } else if (tdeeValue > 4000) {
+            return "text-red-400";
+        }
+    };
     return (
-        <section className="flex">
-            <div className="flex-2 border">
-                <div>BMI:(12-50)     {bmi}</div>
-                <div>BMR: (800-4000) {bmr}</div>
-                <div>TDEE: (1200-5000){tdee}</div>
-            </div>
-            <div className="flex flex-4 flex-col items-center border">
-                <div className="flex w-full flex-wrap place-content-evenly">
-                    <Select
-                        placeholder="Diet Preferences*"
-                        value={diet}
-                        onChange={(selected) => setDiet(selected)}
-                        className="w-[250px]"
-                        options={dietTypeOptions}
-                    />
-                    <Select
-                        placeholder="Activity Level*"
-                        value={activityLevel}
-                        onChange={(selected) => setActivityLevel(selected)}
-                        className="w-[250px]"
-                        options={activityLevelOptions}
-                    />
+        <section className="">
+            <div className="h-10 border"></div>
+            <div className="flex">
+                <div className="flex flex-2 flex-col items-center text-lg">
+                    <div className="relative my-5 flex items-center">
+                        <div className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
+                            i
+                        </div>
+                        <div className="absolute top-6 left-0 z-50 flex hidden w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
+                            <div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        &lt; 18.5
+                                    </span>
+                                    <span className="my-2 w-[110px]">
+                                        Underweight
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        18.5 - 24.9
+                                    </span>
+                                    <span className="my-2 w-[110px]">
+                                        Normal
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        25 - 29.9
+                                    </span>
+                                    <span className="my-2 w-[110px]">
+                                        Overweight
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        30 - 34.9
+                                    </span>
+                                    <span className="my-2 w-[110px]">
+                                        Obese Class I
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        35 - 39.9
+                                    </span>
+                                    <span className="my-2 w-[110px]">
+                                        Obese Class II
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        &ge; 40
+                                    </span>
+                                    <span className="my-2 w-[110px]">
+                                        Obese Class III
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ml-5 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                <span class="poppins-semibold-italic">
+                                    Body Mass Index(BMI)
+                                </span>
+                                <span>=</span>
 
-                    <Select
-                        placeholder="Conditions*"
-                        isOptionDisabled={() => conditions.length >= 3}
-                        isMulti
-                        value={conditions}
-                        onChange={(selected) => {
-                            if (!selected || selected.length <= 3) {
-                                setConditions(selected);
-                            }
-                        }}
-                        className="w-[250px]"
-                        options={healthConditionOptions}
-                    />
-                    <Select
-                        placeholder="Gender*"
-                        value={gender}
-                        onChange={(selected) => setGender(selected)}
-                        className="w-[250px]"
-                        options={genderOptions}
-                    />
+                                <div class="flex flex-col items-center leading-tight">
+                                    <span class="px-2">Weight (kg)</span>
+
+                                    <div class="my-1 w-full border-t border-gray-800"></div>
+
+                                    <span class="px-2">
+                                        (Height (cm) / 100)<sup>2</sup>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        BMI&nbsp;&nbsp;
+                        <span
+                            className={`${handleBMIColor(bmi)} poppins-semibold`}
+                        >
+                            {bmi}
+                        </span>
+                    </div>
+                    <div className="my-5 flex items-center">
+                        <span className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
+                            i
+                        </span>
+                        <div className="absolute top-6 left-0 z-50 flex hidden w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
+                            <div>
+                                <div className="poppins-bold flex items-center justify-center whitespace-nowrap">
+                                    ---- Women ----
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        &lt; 1200
+                                    </span>
+                                    <span className="my-2 w-[110px]">Low</span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        1200 - 1600
+                                    </span>
+                                    <span className="my-2 w-[110px]">
+                                        Normal
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        &gt; 1600
+                                    </span>
+                                    <span className="my-2 w-[110px]">High</span>
+                                </div>
+                                <div className="poppins-bold flex items-center justify-center whitespace-nowrap">
+                                    ---- Men ----
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        &lt; 1400
+                                    </span>
+                                    <span className="my-2 w-[110px]">Low</span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        1400 - 1900
+                                    </span>
+                                    <span className="my-2 w-[110px]">
+                                        Normal
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        &gt; 1900
+                                    </span>
+                                    <span className="my-2 w-[110px]">High</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                    <span class="poppins-semibold-italic">
+                                        Basal Metabolic Rate (BMR -&gt; Male)
+                                    </span>
+
+                                    <span class="mx-2">=</span>
+
+                                    <div class="flex items-center space-x-1">
+                                        <span>(10 × Weight (kg))</span>
+                                        <span>+</span>
+                                        <span>(6.25 × Height (cm))</span>
+                                        <span>−</span>
+                                        <span>(5 × Age (years))</span>
+                                        <span>+</span>
+                                        <span>5</span>
+                                    </div>
+                                </div>
+                                <div class="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                    <span class="poppins-semibold-italic">
+                                        Basal Metabolic Rate (BMR -&gt; Female)
+                                    </span>
+
+                                    <span class="mx-2">=</span>
+
+                                    <div class="flex items-center space-x-1">
+                                        <span>(10 × Weight (kg))</span>
+                                        <span>+</span>
+                                        <span>(6.25 × Height (cm))</span>
+                                        <span>−</span>
+                                        <span>(5 × Age (years))</span>
+                                        <span>−</span>
+                                        <span>161</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        BMR&nbsp;&nbsp;
+                        <span
+                            className={`${handleBMRColor(bmr)} poppins-semibold`}
+                        >
+                            {bmr}
+                        </span>
+                    </div>
+                    <div className="my-5 flex items-center">
+                        <span className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
+                            i
+                        </span>
+                        <div className="absolute hidden top-6 left-0 z-50 flex w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
+                            <div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        &lt; 1500
+                                    </span>
+                                    <span className="my-2 w-[150px]">
+                                        Very Low Expenditure
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        1500 - 2200
+                                    </span>
+                                    <span className="my-2 w-[150px]">
+                                        Light/Moderate
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        2200 - 3000
+                                    </span>
+                                    <span className="my-2 w-[150px]">
+                                        Active
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        3000 - 4000
+                                    </span>
+                                    <span className="my-2 w-[150px]">
+                                        Highly Active
+                                    </span>
+                                </div>
+                                <div className="flex items-center whitespace-nowrap">
+                                    <span className="my-2 w-[100px]">
+                                        &gt; 4000
+                                    </span>
+                                    <span className="my-2 w-[150px]">
+                                        Athlete-Level
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="mx-10 flex items-center text-lg whitespace-nowrap text-gray-800 my-2">
+                                    <span class="poppins-semibold-italic">
+                                        Total Daily Energy Expenditure (TDEE)
+                                    </span>
+
+                                    <span class="mx-2">=</span>
+
+                                    <div class="flex items-center space-x-1">
+                                        <span>BMR</span>
+                                        <span>×</span>
+                                        <span>Activity Factor</span>
+                                    </div>
+                                </div>
+
+                                <div class="mx-10 whitespace-nowrap text-gray-500">
+                                    <div class="flex w-[420px] justify-between my-2">
+                                        <span>
+                                            Sedentary (little or no exercise)
+                                        </span>
+                                        <span>1.2</span>
+                                    </div>
+
+                                    <div class="flex w-[420px] justify-between my-2">
+                                        <span>
+                                            Lightly Active (1–3 days/week)
+                                        </span>
+                                        <span>1.375</span>
+                                    </div>
+
+                                    <div class="flex w-[420px] justify-between my-2">
+                                        <span>
+                                            Moderately Active (3–5 days/week)
+                                        </span>
+                                        <span>1.55</span>
+                                    </div>
+
+                                    <div class="flex w-[420px] justify-between my-2">
+                                        <span>Very Active (6–7 days/week)</span>
+                                        <span>1.725</span>
+                                    </div>
+
+                                    <div class="flex w-[420px] justify-between my-2">
+                                        <span>
+                                            Extra Active (Athlete / Physical
+                                            Job)
+                                        </span>
+                                        <span>1.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        TDEE&nbsp;&nbsp;
+                        <span
+                            className={`${handleTDEEColor(tdee)} poppins-semibold`}
+                        >
+                            {tdee}
+                        </span>
+                    </div>
                 </div>
-                <button
-                    onClick={handleSubmit}
-                    className="poppins-semibold hover:border-bg-green-700 cursor-pointer rounded-xl border-4 bg-green-700 px-4 py-2 text-white hover:bg-white hover:text-green-700"
-                >
-                    Submit
-                </button>
-            </div>
-            <div className="flex-3 border">
-                <div className="flex w-full flex-wrap place-content-evenly">
-                    <input
-                        type="number"
-                        step="0.1"
-                        min="54.6"
-                        max="243.84"
-                        value={height}
-                        onChange={(e) => setHeight(e.target.value)}
-                        className="w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
-                        placeholder="Height (in cm)*"
-                    />
-                    <input
-                        type="number"
-                        step="0.1"
-                        min="15"
-                        max="300"
-                        value={weight}
-                        onChange={(e) => setWeight(e.target.value)}
-                        className="w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
-                        placeholder="Weight (in kg)*"
-                    />
-                    <input
-                        type="number"
-                        min="10"
-                        max="100"
-                        value={age}
-                        onChange={(e) => setAge(e.target.value)}
-                        className="w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
-                        placeholder="Age (10-100)*"
-                    />
-                    <input
-                        type="number"
-                        step="0.1"
-                        min="3"
-                        max="50"
-                        value={bodyFatPercentage}
-                        onChange={(e) => setBodyFatPercentage(e.target.value)}
-                        className="w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
-                        placeholder="Body Fat Percentage"
-                    />
-                    <input
-                        type="number"
-                        step="0.1"
-                        min="800"
-                        max="6000"
-                        value={calorieTarget}
-                        onChange={(e) => setCalorieTarget(e.target.value)}
-                        className="w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
-                        placeholder="Calorie Target (in kcal)"
-                    />
-                    <input
-                        type="number"
-                        step="0.1"
-                        min="30"
-                        max="350"
-                        value={proteinTarget}
-                        onChange={(e) => setProteinTarget(e.target.value)}
-                        className="w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
-                        placeholder="Protein Target (in gm)"
-                    />
+                <div className="flex flex-4 flex-col items-center">
+                    <div className="flex w-full flex-wrap place-content-evenly">
+                        <Select
+                            placeholder="Diet Preferences*"
+                            value={diet}
+                            onChange={(selected) => setDiet(selected)}
+                            className="my-5 w-[250px]"
+                            options={dietTypeOptions}
+                        />
+                        <Select
+                            placeholder="Activity Level*"
+                            value={activityLevel}
+                            onChange={(selected) => setActivityLevel(selected)}
+                            className="my-5 w-[250px]"
+                            options={activityLevelOptions}
+                        />
+
+                        <Select
+                            placeholder="Conditions*"
+                            isOptionDisabled={() => conditions.length >= 3}
+                            isMulti
+                            value={conditions}
+                            onChange={(selected) => {
+                                if (!selected || selected.length <= 3) {
+                                    setConditions(selected);
+                                }
+                            }}
+                            className="my-5 w-[250px]"
+                            options={healthConditionOptions}
+                        />
+                        <Select
+                            placeholder="Gender*"
+                            value={gender}
+                            onChange={(selected) => setGender(selected)}
+                            className="my-5 w-[250px]"
+                            options={genderOptions}
+                        />
+                    </div>
+                    <button
+                        onClick={handleSubmit}
+                        className="poppins-semibold hover:border-bg-green-700 my-5 cursor-pointer rounded-xl border-4 bg-green-700 px-4 py-2 text-white hover:bg-white hover:text-green-700"
+                    >
+                        Submit
+                    </button>
+                </div>
+                <div className="flex-3">
+                    <div className="flex w-full flex-wrap place-content-evenly">
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="54.6"
+                            max="243.84"
+                            value={height}
+                            onChange={(e) => setHeight(e.target.value)}
+                            className="my-5 w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
+                            placeholder="Height (in cm)*"
+                        />
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="15"
+                            max="300"
+                            value={weight}
+                            onChange={(e) => setWeight(e.target.value)}
+                            className="my-5 w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
+                            placeholder="Weight (in kg)*"
+                        />
+                        <input
+                            type="number"
+                            min="10"
+                            max="100"
+                            value={age}
+                            onChange={(e) => setAge(e.target.value)}
+                            className="my-5 w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
+                            placeholder="Age (10-100)*"
+                        />
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="3"
+                            max="50"
+                            value={bodyFatPercentage}
+                            onChange={(e) =>
+                                setBodyFatPercentage(e.target.value)
+                            }
+                            className="my-5 w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
+                            placeholder="Body Fat Percentage"
+                        />
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="800"
+                            max="6000"
+                            value={calorieTarget}
+                            onChange={(e) => setCalorieTarget(e.target.value)}
+                            className="my-5 w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
+                            placeholder="Calorie Target (in kcal)"
+                        />
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="30"
+                            max="350"
+                            value={proteinTarget}
+                            onChange={(e) => setProteinTarget(e.target.value)}
+                            className="my-5 w-[210px] rounded-md border border-gray-300 px-3 py-2 text-center"
+                            placeholder="Protein Target (in gm)"
+                        />
+                    </div>
                 </div>
             </div>
         </section>
