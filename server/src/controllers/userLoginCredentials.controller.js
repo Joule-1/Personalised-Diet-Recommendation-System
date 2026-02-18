@@ -2,9 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { UserLogin } from "../models/userLoginCredentials.model.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
-import { v2 as cloudinary } from "cloudinary";
 
 const generateAccessAndRefreshTokens = async (userId) => {
     try {

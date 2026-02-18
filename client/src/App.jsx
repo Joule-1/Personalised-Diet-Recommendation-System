@@ -14,6 +14,7 @@ import Pricings from "./components/LandingPage/Pricings.jsx";
 import Testimonials from "./components/LandingPage/Testimonials.jsx";
 import { AuthContext } from "./utils/AuthContext.jsx";
 import { Navigate } from "react-router-dom";
+import VerifyUserLogIn from "./utils/VerifyUserLogIn.jsx";
 
 const AppWrapper = () => {
     const { user, setUser } = useContext(AuthContext);
@@ -28,16 +29,30 @@ const AppWrapper = () => {
                         user ? <Navigate to="/dashboard" replace /> : <Home />
                     }
                 />
+                <Route
+                    path="/"
+                    element={
+                        user ? <Navigate to="/dashboard" replace /> : <SignIn />
+                    }
+                />
+                <Route
+                    path="/"
+                    element={
+                        user ? <Navigate to="/dashboard" replace /> : <SignUp />
+                    }
+                />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/pricing" element={<Pricings />} />
                 <Route path="/testimonials" element={<Testimonials />} />
                 <Route path="/tos" element={<TermsOfService />} />
-                <Route
-                    path="/dashboard"
-                    element={<UserPreferencesCollector />}
-                />
+                <Route element={<VerifyUserLogIn />}>
+                    <Route
+                        path="/dashboard"
+                        element={<UserPreferencesCollector />}
+                    />
+                </Route>
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

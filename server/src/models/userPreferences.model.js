@@ -11,7 +11,7 @@ const numericRangeValidator = (min, max, allowDecimal = true) => ({
         const num = Number(value);
         return num >= min && num <= max;
     },
-    message: props => `${props.path} must be between ${min} and ${max}`
+    message: (props) => `${props.path} must be between ${min} and ${max}`,
 });
 
 const userPreferencesSchema = new Schema(
@@ -45,7 +45,7 @@ const userPreferencesSchema = new Schema(
         age: {
             type: String,
             required: true,
-            validate: numericRangeValidator(10, 100)
+            validate: numericRangeValidator(10, 100),
         },
 
         gender: {
@@ -55,47 +55,46 @@ const userPreferencesSchema = new Schema(
         },
 
         height: {
-    type: String,
-    required: true,
-    validate: numericRangeValidator(50, 300) // cm
-},
+            type: String,
+            required: true,
+            validate: numericRangeValidator(50, 300), // cm
+        },
 
-weight: {
-    type: String,
-    required: true,
-    validate: numericRangeValidator(20, 500) // kg
-},
+        weight: {
+            type: String,
+            required: true,
+            validate: numericRangeValidator(20, 500), // kg
+        },
+        
+        bodyFatPercentage: {
+            type: String,
+            validate: numericRangeValidator(1, 70), // %
+        },
 
-bodyFatPercentage: {
-    type: String,
-    validate: numericRangeValidator(1, 70) // %
-},
+        calorieTarget: {
+            type: String,
+            validate: numericRangeValidator(800, 10000),
+        },
 
-calorieTarget: {
-    type: String,
-    validate: numericRangeValidator(800, 10000)
-},
+        proteinTarget: {
+            type: String,
+            validate: numericRangeValidator(10, 400),
+        },
 
-proteinTarget: {
-    type: String,
-    validate: numericRangeValidator(10, 400)
-},
+        bmi: {
+            type: String,
+            validate: numericRangeValidator(12, 50),
+        },
 
-bmi: {
-    type: String,
-    validate: numericRangeValidator(12, 50)
-},
+        bmr: {
+            type: String,
+            validate: numericRangeValidator(800, 4000),
+        },
 
-bmr: {
-    type: String,
-    validate: numericRangeValidator(800, 4000)
-},
-
-tdee: {
-    type: String,
-    validate: numericRangeValidator(1200, 5000)
-},
-
+        tdee: {
+            type: String,
+            validate: numericRangeValidator(1200, 5000),
+        },
     },
     { timestamps: true }
 );

@@ -23,7 +23,12 @@ const AuthProvider = ({ children }) => {
         checkAuth();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading)
+        return (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-medium">
+                Loading...
+            </div>
+        );
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>

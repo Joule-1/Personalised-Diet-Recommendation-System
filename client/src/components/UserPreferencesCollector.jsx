@@ -1,10 +1,12 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Select from "react-select";
 import { dietTypeOptions } from "../utils/options/dietType_options";
 import { activityLevelOptions } from "../utils/options/activityLevel_options";
 import { healthConditionOptions } from "../utils/options/healthCondition_options";
 import { genderOptions } from "../utils/options/gender_options";
 import { userPreferencesAPI } from "../utils/UserPreferencesAxios";
+import { AuthContext } from "../utils/AuthContext";
+import VerifyUserLogIn from "../utils/VerifyUserLogIn";
 
 const UserPreferencesCollector = () => {
     const [dietPreference, setDietPreference] = useState(false);
@@ -17,10 +19,48 @@ const UserPreferencesCollector = () => {
     const [bodyFatPercentage, setBodyFatPercentage] = useState("");
     const [calorieTarget, setCalorieTarget] = useState("");
     const [proteinTarget, setProteinTarget] = useState("");
+    const [bmiInfoDisplay, setBMIInfoDisplay] = useState(false);
+    const [bmrInfoDisplay, setBMRInfoDisplay] = useState(false);
+    const [tdeeInfoDisplay, setTDEEInfoDisplay] = useState(false);
+    const bmiInfoDisplayRef = useRef(null);
+    const bmrInfoDisplayRef = useRef(null);
+    const tdeeInfoDisplayRef = useRef(null);
 
-    const handleSubmit = async(event) => {
+    useEffect(() => {
+        function handleClickOutsideInfoBox(e) {
+            if (
+                bmiInfoDisplayRef.current &&
+                !bmiInfoDisplayRef.current.contains(e.target)
+            ) {
+                setBMIInfoDisplay(false);
+            }
+            if (
+                bmrInfoDisplayRef.current &&
+                !bmrInfoDisplayRef.current.contains(e.target)
+            ) {
+                setBMRInfoDisplay(false);
+            }
+            if (
+                tdeeInfoDisplayRef.current &&
+                !tdeeInfoDisplayRef.current.contains(e.target)
+            ) {
+                setTDEEInfoDisplay(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutsideInfoBox);
+        return () =>
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutsideInfoBox
+            );
+    }, []);
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await userPreferencesAPI.put("/registerUserPreferences", {
+        const response = await userPreferencesAPI.put(
+            "/registerUserPreferences",
+            {
                 conditions: conditions,
                 dietPreference: dietPreference,
                 activityLevel: activityLevel,
@@ -33,16 +73,17 @@ const UserPreferencesCollector = () => {
                 proteinTarget: proteinTarget,
                 bmi: String(bmi),
                 bmr: String(bmr),
-                tdee: String(tdee)
-        });
+                tdee: String(tdee),
+            }
+        );
     };
 
     const bmi = useMemo(() => {
         if (!height || !weight) return 0;
 
         const value = weight / (height / 100) ** 2;
-        if(value < 12) return "< 12";
-        if(value > 50) return "> 50"
+        if (value < 12) return "< 12";
+        if (value > 50) return "> 50";
         return Number(value.toFixed(1));
     }, [height, weight]);
 
@@ -50,14 +91,14 @@ const UserPreferencesCollector = () => {
         if (!weight || !height || !age || !gender) return 0;
 
         if (gender === "male") {
-            const ansM = Math.round(10 * weight + 6.25 * height - 5 * age + 5)
-            if(ansM < 800) return "< 800"
-            if(ansM > 4000) return "> 4000"
+            const ansM = Math.round(10 * weight + 6.25 * height - 5 * age + 5);
+            if (ansM < 800) return "< 800";
+            if (ansM > 4000) return "> 4000";
             return ansM;
         }
-        let ansF = Math.round(10 * weight + 6.25 * height - 5 * age - 161)
-        if(ansF < 800) return "< 800"
-        if(ansF > 4000) return "> 4000"
+        let ansF = Math.round(10 * weight + 6.25 * height - 5 * age - 161);
+        if (ansF < 800) return "< 800";
+        if (ansF > 4000) return "> 4000";
         return ansF;
     }, [weight, height, age, gender]);
 
@@ -72,22 +113,10 @@ const UserPreferencesCollector = () => {
             very_active: 1.9,
         };
         const ans = Math.round(bmr * multipliers[activityLevel]);
-        if(ans < 1200) return "< 1200"
-        if(ans > 5000) return "> 5000"
-        return ans
+        if (ans < 1200) return "< 1200";
+        if (ans > 5000) return "> 5000";
+        return ans;
     }, [bmr, activityLevel]);
-
-    const handleBMIInfoDisplay = () => {
-
-    }
-
-    const handleBMRInfoDisplay = () => {
-
-    }
-
-    const handleTDEEInfoDisplay = () => {
-
-    }
 
     // BMI	Category (12-50)
     // < 18.5	Underweight
@@ -130,8 +159,7 @@ const UserPreferencesCollector = () => {
             return "text-red-400";
         } else if (bmiValue >= 40) {
             return "text-red-800";
-        }
-        else{
+        } else {
             return "text-gray-400";
         }
     };
@@ -143,8 +171,7 @@ const UserPreferencesCollector = () => {
                 return "text-green-400";
             } else if (bmrValue > 1900) {
                 return "text-red-400";
-            }
-            else {
+            } else {
                 return "text-gray-400";
             }
         } else {
@@ -154,8 +181,7 @@ const UserPreferencesCollector = () => {
                 return "text-green-400";
             } else if (bmrValue > 1600) {
                 return "text-red-400";
-            }
-            else {
+            } else {
                 return "text-gray-400";
             }
         }
@@ -171,8 +197,7 @@ const UserPreferencesCollector = () => {
             return "text-orange-400";
         } else if (tdeeValue > 4000) {
             return "text-red-400";
-        }
-        else {
+        } else {
             return "text-gray-400";
         }
     };
@@ -183,170 +208,200 @@ const UserPreferencesCollector = () => {
             <div className="flex">
                 <div className="flex flex-2 flex-col items-center text-lg">
                     <div className="relative my-5 flex items-center">
-                        <div onClick={handleBMIInfoDisplay} className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
-                            i
-                        </div>
-                        <div className="absolute top-6 left-0 z-50 flex hidden w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
-                            <div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        &lt; 18.5
-                                    </span>
-                                    <span className="my-2 w-[110px]">
-                                        Underweight
-                                    </span>
+                        <div ref={bmiInfoDisplayRef}>
+                            <button
+                                onClick={() =>
+                                    setBMIInfoDisplay((prev) => !prev)
+                                }
+                                className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white"
+                            >
+                                i
+                            </button>
+                            <div
+                                className={`${bmiInfoDisplay ? "block" : "hidden"} absolute top-6 left-0 z-50 flex w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg`}
+                            >
+                                <div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            &lt; 18.5
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Underweight
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            18.5 - 24.9
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Normal
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            25 - 29.9
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Overweight
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            30 - 34.9
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Obese Class I
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            35 - 39.9
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Obese Class II
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            &ge; 40
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Obese Class III
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        18.5 - 24.9
+                                <div className="ml-5 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                    <span className="poppins-semibold-italic">
+                                        Body Mass Index(BMI)
                                     </span>
-                                    <span className="my-2 w-[110px]">
-                                        Normal
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        25 - 29.9
-                                    </span>
-                                    <span className="my-2 w-[110px]">
-                                        Overweight
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        30 - 34.9
-                                    </span>
-                                    <span className="my-2 w-[110px]">
-                                        Obese Class I
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        35 - 39.9
-                                    </span>
-                                    <span className="my-2 w-[110px]">
-                                        Obese Class II
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        &ge; 40
-                                    </span>
-                                    <span className="my-2 w-[110px]">
-                                        Obese Class III
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="ml-5 flex items-center text-lg whitespace-nowrap text-gray-800">
-                                <span className="poppins-semibold-italic">
-                                    Body Mass Index(BMI)
-                                </span>
-                                <span>=</span>
+                                    <span>=</span>
 
-                                <div className="flex flex-col items-center leading-tight">
-                                    <span className="px-2">Weight (kg)</span>
+                                    <div className="flex flex-col items-center leading-tight">
+                                        <span className="px-2">
+                                            Weight (kg)
+                                        </span>
 
-                                    <div className="my-1 w-full border-t border-gray-800"></div>
+                                        <div className="my-1 w-full border-t border-gray-800"></div>
 
-                                    <span className="px-2">
-                                        (Height (cm) / 100)<sup>2</sup>
-                                    </span>
+                                        <span className="px-2">
+                                            (Height (cm) / 100)<sup>2</sup>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div>BMI</div>&nbsp;&nbsp;
-                        <div
+                        <button
                             className={`${handleBMIColor(bmi)} poppins-semibold`}
                         >
                             {bmi}
-                        </div>
+                        </button>
                     </div>
                     <div className="my-5 flex items-center">
-                        <button onClick={handleBMRInfoDisplay} className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
-                            i
-                        </button>
-                        <div className="absolute top-6 left-0 z-50 flex hidden w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
-                            <div>
-                                <div className="poppins-bold flex items-center justify-center whitespace-nowrap">
-                                    ---- Women ----
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        &lt; 1200
-                                    </span>
-                                    <span className="my-2 w-[110px]">Low</span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        1200 - 1600
-                                    </span>
-                                    <span className="my-2 w-[110px]">
-                                        Normal
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        &gt; 1600
-                                    </span>
-                                    <span className="my-2 w-[110px]">High</span>
-                                </div>
-                                <div className="poppins-bold flex items-center justify-center whitespace-nowrap">
-                                    ---- Men ----
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        &lt; 1400
-                                    </span>
-                                    <span className="my-2 w-[110px]">Low</span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        1400 - 1900
-                                    </span>
-                                    <span className="my-2 w-[110px]">
-                                        Normal
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        &gt; 1900
-                                    </span>
-                                    <span className="my-2 w-[110px]">High</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
-                                    <span className="poppins-semibold-italic">
-                                        Basal Metabolic Rate (BMR -&gt; Male)
-                                    </span>
-
-                                    <span className="mx-2">=</span>
-
-                                    <div className="flex items-center space-x-1">
-                                        <span>(10 × Weight (kg))</span>
-                                        <span>+</span>
-                                        <span>(6.25 × Height (cm))</span>
-                                        <span>−</span>
-                                        <span>(5 × Age (years))</span>
-                                        <span>+</span>
-                                        <span>5</span>
+                        <div ref={bmrInfoDisplayRef} className="relative">
+                            <button
+                                onClick={() =>
+                                    setBMRInfoDisplay((prev) => !prev)
+                                }
+                                className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white"
+                            >
+                                i
+                            </button>
+                            <div
+                                className={`${bmrInfoDisplay ? "block" : "hidden"} absolute top-6 left-0 z-50 flex w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg`}
+                            >
+                                <div>
+                                    <div className="poppins-bold flex items-center justify-center whitespace-nowrap">
+                                        ---- Women ----
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            &lt; 1200
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Low
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            1200 - 1600
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Normal
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            &gt; 1600
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            High
+                                        </span>
+                                    </div>
+                                    <div className="poppins-bold flex items-center justify-center whitespace-nowrap">
+                                        ---- Men ----
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            &lt; 1400
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Low
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            1400 - 1900
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            Normal
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            &gt; 1900
+                                        </span>
+                                        <span className="my-2 w-[110px]">
+                                            High
+                                        </span>
                                     </div>
                                 </div>
-                                <div className="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
-                                    <span className="poppins-semibold-italic">
-                                        Basal Metabolic Rate (BMR -&gt; Female)
-                                    </span>
+                                <div>
+                                    <div className="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                        <span className="poppins-semibold-italic">
+                                            Basal Metabolic Rate (BMR -&gt;
+                                            Male)
+                                        </span>
 
-                                    <span className="mx-2">=</span>
+                                        <span className="mx-2">=</span>
 
-                                    <div className="flex items-center space-x-1">
-                                        <span>(10 × Weight (kg))</span>
-                                        <span>+</span>
-                                        <span>(6.25 × Height (cm))</span>
-                                        <span>−</span>
-                                        <span>(5 × Age (years))</span>
-                                        <span>−</span>
-                                        <span>161</span>
+                                        <div className="flex items-center space-x-1">
+                                            <span>(10 × Weight (kg))</span>
+                                            <span>+</span>
+                                            <span>(6.25 × Height (cm))</span>
+                                            <span>−</span>
+                                            <span>(5 × Age (years))</span>
+                                            <span>+</span>
+                                            <span>5</span>
+                                        </div>
+                                    </div>
+                                    <div className="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                        <span className="poppins-semibold-italic">
+                                            Basal Metabolic Rate (BMR -&gt;
+                                            Female)
+                                        </span>
+
+                                        <span className="mx-2">=</span>
+
+                                        <div className="flex items-center space-x-1">
+                                            <span>(10 × Weight (kg))</span>
+                                            <span>+</span>
+                                            <span>(6.25 × Height (cm))</span>
+                                            <span>−</span>
+                                            <span>(5 × Age (years))</span>
+                                            <span>−</span>
+                                            <span>161</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -359,100 +414,114 @@ const UserPreferencesCollector = () => {
                         </div>
                     </div>
                     <div className="my-5 flex items-center">
-                        <button onClick={handleTDEEInfoDisplay} className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
-                            i
-                        </button>
-                        <div className="absolute hidden top-6 left-0 z-50 flex w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
-                            <div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        &lt; 1500
-                                    </span>
-                                    <span className="my-2 w-[150px]">
-                                        Very Low Expenditure
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        1500 - 2200
-                                    </span>
-                                    <span className="my-2 w-[150px]">
-                                        Light/Moderate
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        2200 - 3000
-                                    </span>
-                                    <span className="my-2 w-[150px]">
-                                        Active
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        3000 - 4000
-                                    </span>
-                                    <span className="my-2 w-[150px]">
-                                        Highly Active
-                                    </span>
-                                </div>
-                                <div className="flex items-center whitespace-nowrap">
-                                    <span className="my-2 w-[100px]">
-                                        &gt; 4000
-                                    </span>
-                                    <span className="my-2 w-[150px]">
-                                        Athlete-Level
-                                    </span>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="mx-10 flex items-center text-lg whitespace-nowrap text-gray-800 my-2">
-                                    <span className="poppins-semibold-italic">
-                                        Total Daily Energy Expenditure (TDEE)
-                                    </span>
-
-                                    <span className="mx-2">=</span>
-
-                                    <div className="flex items-center space-x-1">
-                                        <span>BMR</span>
-                                        <span>×</span>
-                                        <span>Activity Factor</span>
-                                    </div>
-                                </div>
-
-                                <div className="mx-10 whitespace-nowrap text-gray-500">
-                                    <div className="flex w-[420px] justify-between my-2">
-                                        <span>
-                                            Sedentary (little or no exercise)
+                        <div ref={tdeeInfoDisplayRef} className="relative">
+                            <button
+                                onClick={() =>
+                                    setTDEEInfoDisplay((prev) => !prev)
+                                }
+                                className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white"
+                            >
+                                i
+                            </button>
+                            <div
+                                className={`absolute ${tdeeInfoDisplay ? "block" : "hidden"} top-6 left-0 z-50 flex w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg`}
+                            >
+                                <div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            &lt; 1500
                                         </span>
-                                        <span>1.2</span>
-                                    </div>
-
-                                    <div className="flex w-[420px] justify-between my-2">
-                                        <span>
-                                            Lightly Active (1–3 days/week)
+                                        <span className="my-2 w-[150px]">
+                                            Very Low Expenditure
                                         </span>
-                                        <span>1.375</span>
                                     </div>
-
-                                    <div className="flex w-[420px] justify-between my-2">
-                                        <span>
-                                            Moderately Active (3–5 days/week)
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            1500 - 2200
                                         </span>
-                                        <span>1.55</span>
-                                    </div>
-
-                                    <div className="flex w-[420px] justify-between my-2">
-                                        <span>Very Active (6–7 days/week)</span>
-                                        <span>1.725</span>
-                                    </div>
-
-                                    <div className="flex w-[420px] justify-between my-2">
-                                        <span>
-                                            Extra Active (Athlete / Physical
-                                            Job)
+                                        <span className="my-2 w-[150px]">
+                                            Light/Moderate
                                         </span>
-                                        <span>1.9</span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            2200 - 3000
+                                        </span>
+                                        <span className="my-2 w-[150px]">
+                                            Active
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            3000 - 4000
+                                        </span>
+                                        <span className="my-2 w-[150px]">
+                                            Highly Active
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center whitespace-nowrap">
+                                        <span className="my-2 w-[100px]">
+                                            &gt; 4000
+                                        </span>
+                                        <span className="my-2 w-[150px]">
+                                            Athlete-Level
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="mx-10 my-2 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                        <span className="poppins-semibold-italic">
+                                            Total Daily Energy Expenditure
+                                            (TDEE)
+                                        </span>
+
+                                        <span className="mx-2">=</span>
+
+                                        <div className="flex items-center space-x-1">
+                                            <span>BMR</span>
+                                            <span>×</span>
+                                            <span>Activity Factor</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="mx-10 whitespace-nowrap text-gray-500">
+                                        <div className="my-2 flex w-[420px] justify-between">
+                                            <span>
+                                                Sedentary (little or no
+                                                exercise)
+                                            </span>
+                                            <span>1.2</span>
+                                        </div>
+
+                                        <div className="my-2 flex w-[420px] justify-between">
+                                            <span>
+                                                Lightly Active (1–3 days/week)
+                                            </span>
+                                            <span>1.375</span>
+                                        </div>
+
+                                        <div className="my-2 flex w-[420px] justify-between">
+                                            <span>
+                                                Moderately Active (3–5
+                                                days/week)
+                                            </span>
+                                            <span>1.55</span>
+                                        </div>
+
+                                        <div className="my-2 flex w-[420px] justify-between">
+                                            <span>
+                                                Very Active (6–7 days/week)
+                                            </span>
+                                            <span>1.725</span>
+                                        </div>
+
+                                        <div className="my-2 flex w-[420px] justify-between">
+                                            <span>
+                                                Extra Active (Athlete / Physical
+                                                Job)
+                                            </span>
+                                            <span>1.9</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -470,14 +539,18 @@ const UserPreferencesCollector = () => {
                         <Select
                             placeholder="Diet Preferences*"
                             value={dietPreference.value}
-                            onChange={(selected) => setDietPreference(selected.value)}
+                            onChange={(selected) =>
+                                setDietPreference(selected.value)
+                            }
                             className="my-5 w-[250px]"
                             options={dietTypeOptions}
                         />
                         <Select
                             placeholder="Activity Level*"
                             value={activityLevel.value}
-                            onChange={(selected) => setActivityLevel(selected.value)}
+                            onChange={(selected) =>
+                                setActivityLevel(selected.value)
+                            }
                             className="my-5 w-[250px]"
                             options={activityLevelOptions}
                         />
@@ -486,17 +559,18 @@ const UserPreferencesCollector = () => {
                             placeholder="Conditions*"
                             isOptionDisabled={() => conditions?.length >= 3}
                             isMulti
-value={healthConditionOptions.filter(option =>
-    conditions?.includes(option.value)
-  )}                           onChange={(selected) => {
-    if (!selected || selected.length <= 3) {
-      const valuesArray = selected
-        ? selected.map(option => option.value)
-        : [];
+                            value={healthConditionOptions.filter((option) =>
+                                conditions?.includes(option.value)
+                            )}
+                            onChange={(selected) => {
+                                if (!selected || selected.length <= 3) {
+                                    const valuesArray = selected
+                                        ? selected.map((option) => option.value)
+                                        : [];
 
-      setConditions(valuesArray);
-    }
-  }}
+                                    setConditions(valuesArray);
+                                }
+                            }}
                             className="my-5 w-[250px]"
                             options={healthConditionOptions}
                         />
