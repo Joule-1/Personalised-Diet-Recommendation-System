@@ -4,12 +4,10 @@ import { dietTypeOptions } from "../utils/options/dietType_options";
 import { activityLevelOptions } from "../utils/options/activityLevel_options";
 import { healthConditionOptions } from "../utils/options/healthCondition_options";
 import { genderOptions } from "../utils/options/gender_options";
+import { userPreferencesAPI } from "../utils/UserPreferencesAxios";
 
 const UserPreferencesCollector = () => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    };
-    const [diet, setDiet] = useState(false);
+    const [dietPreference, setDietPreference] = useState(false);
     const [activityLevel, setActivityLevel] = useState("");
     const [conditions, setConditions] = useState([]);
     const [gender, setGender] = useState("");
@@ -19,6 +17,25 @@ const UserPreferencesCollector = () => {
     const [bodyFatPercentage, setBodyFatPercentage] = useState("");
     const [calorieTarget, setCalorieTarget] = useState("");
     const [proteinTarget, setProteinTarget] = useState("");
+
+    const handleSubmit = async(event) => {
+        event.preventDefault();
+        const response = await userPreferencesAPI.put("/registerUserPreferences", {
+                conditions: conditions,
+                dietPreference: dietPreference,
+                activityLevel: activityLevel,
+                age: age,
+                gender: gender,
+                height: height,
+                weight: weight,
+                bodyFatPercentage: bodyFatPercentage,
+                calorieTarget: calorieTarget,
+                proteinTarget: proteinTarget,
+                bmi: String(bmi),
+                bmr: String(bmr),
+                tdee: String(tdee)
+        });
+    };
 
     const bmi = useMemo(() => {
         if (!height || !weight) return 0;
@@ -54,7 +71,7 @@ const UserPreferencesCollector = () => {
             active: 1.725,
             very_active: 1.9,
         };
-        const ans = Math.round(bmr * multipliers[activityLevel.value]);
+        const ans = Math.round(bmr * multipliers[activityLevel]);
         if(ans < 1200) return "< 1200"
         if(ans > 5000) return "> 5000"
         return ans
@@ -159,6 +176,7 @@ const UserPreferencesCollector = () => {
             return "text-gray-400";
         }
     };
+
     return (
         <section className="">
             <div className="h-10 border"></div>
@@ -219,18 +237,18 @@ const UserPreferencesCollector = () => {
                                     </span>
                                 </div>
                             </div>
-                            <div class="ml-5 flex items-center text-lg whitespace-nowrap text-gray-800">
-                                <span class="poppins-semibold-italic">
+                            <div className="ml-5 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                <span className="poppins-semibold-italic">
                                     Body Mass Index(BMI)
                                 </span>
                                 <span>=</span>
 
-                                <div class="flex flex-col items-center leading-tight">
-                                    <span class="px-2">Weight (kg)</span>
+                                <div className="flex flex-col items-center leading-tight">
+                                    <span className="px-2">Weight (kg)</span>
 
-                                    <div class="my-1 w-full border-t border-gray-800"></div>
+                                    <div className="my-1 w-full border-t border-gray-800"></div>
 
-                                    <span class="px-2">
+                                    <span className="px-2">
                                         (Height (cm) / 100)<sup>2</sup>
                                     </span>
                                 </div>
@@ -297,14 +315,14 @@ const UserPreferencesCollector = () => {
                                 </div>
                             </div>
                             <div>
-                                <div class="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
-                                    <span class="poppins-semibold-italic">
+                                <div className="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                    <span className="poppins-semibold-italic">
                                         Basal Metabolic Rate (BMR -&gt; Male)
                                     </span>
 
-                                    <span class="mx-2">=</span>
+                                    <span className="mx-2">=</span>
 
-                                    <div class="flex items-center space-x-1">
+                                    <div className="flex items-center space-x-1">
                                         <span>(10 × Weight (kg))</span>
                                         <span>+</span>
                                         <span>(6.25 × Height (cm))</span>
@@ -314,14 +332,14 @@ const UserPreferencesCollector = () => {
                                         <span>5</span>
                                     </div>
                                 </div>
-                                <div class="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
-                                    <span class="poppins-semibold-italic">
+                                <div className="mx-5 my-10 flex items-center text-lg whitespace-nowrap text-gray-800">
+                                    <span className="poppins-semibold-italic">
                                         Basal Metabolic Rate (BMR -&gt; Female)
                                     </span>
 
-                                    <span class="mx-2">=</span>
+                                    <span className="mx-2">=</span>
 
-                                    <div class="flex items-center space-x-1">
+                                    <div className="flex items-center space-x-1">
                                         <span>(10 × Weight (kg))</span>
                                         <span>+</span>
                                         <span>(6.25 × Height (cm))</span>
@@ -388,48 +406,48 @@ const UserPreferencesCollector = () => {
                                 </div>
                             </div>
                             <div>
-                                <div class="mx-10 flex items-center text-lg whitespace-nowrap text-gray-800 my-2">
-                                    <span class="poppins-semibold-italic">
+                                <div className="mx-10 flex items-center text-lg whitespace-nowrap text-gray-800 my-2">
+                                    <span className="poppins-semibold-italic">
                                         Total Daily Energy Expenditure (TDEE)
                                     </span>
 
-                                    <span class="mx-2">=</span>
+                                    <span className="mx-2">=</span>
 
-                                    <div class="flex items-center space-x-1">
+                                    <div className="flex items-center space-x-1">
                                         <span>BMR</span>
                                         <span>×</span>
                                         <span>Activity Factor</span>
                                     </div>
                                 </div>
 
-                                <div class="mx-10 whitespace-nowrap text-gray-500">
-                                    <div class="flex w-[420px] justify-between my-2">
+                                <div className="mx-10 whitespace-nowrap text-gray-500">
+                                    <div className="flex w-[420px] justify-between my-2">
                                         <span>
                                             Sedentary (little or no exercise)
                                         </span>
                                         <span>1.2</span>
                                     </div>
 
-                                    <div class="flex w-[420px] justify-between my-2">
+                                    <div className="flex w-[420px] justify-between my-2">
                                         <span>
                                             Lightly Active (1–3 days/week)
                                         </span>
                                         <span>1.375</span>
                                     </div>
 
-                                    <div class="flex w-[420px] justify-between my-2">
+                                    <div className="flex w-[420px] justify-between my-2">
                                         <span>
                                             Moderately Active (3–5 days/week)
                                         </span>
                                         <span>1.55</span>
                                     </div>
 
-                                    <div class="flex w-[420px] justify-between my-2">
+                                    <div className="flex w-[420px] justify-between my-2">
                                         <span>Very Active (6–7 days/week)</span>
                                         <span>1.725</span>
                                     </div>
 
-                                    <div class="flex w-[420px] justify-between my-2">
+                                    <div className="flex w-[420px] justify-between my-2">
                                         <span>
                                             Extra Active (Athlete / Physical
                                             Job)
@@ -451,36 +469,41 @@ const UserPreferencesCollector = () => {
                     <div className="flex w-full flex-wrap place-content-evenly">
                         <Select
                             placeholder="Diet Preferences*"
-                            value={diet}
-                            onChange={(selected) => setDiet(selected)}
+                            value={dietPreference.value}
+                            onChange={(selected) => setDietPreference(selected.value)}
                             className="my-5 w-[250px]"
                             options={dietTypeOptions}
                         />
                         <Select
                             placeholder="Activity Level*"
-                            value={activityLevel}
-                            onChange={(selected) => setActivityLevel(selected)}
+                            value={activityLevel.value}
+                            onChange={(selected) => setActivityLevel(selected.value)}
                             className="my-5 w-[250px]"
                             options={activityLevelOptions}
                         />
 
                         <Select
                             placeholder="Conditions*"
-                            isOptionDisabled={() => conditions.length >= 3}
+                            isOptionDisabled={() => conditions?.length >= 3}
                             isMulti
-                            value={conditions}
-                            onChange={(selected) => {
-                                if (!selected || selected.length <= 3) {
-                                    setConditions(selected);
-                                }
-                            }}
+value={healthConditionOptions.filter(option =>
+    conditions?.includes(option.value)
+  )}                           onChange={(selected) => {
+    if (!selected || selected.length <= 3) {
+      const valuesArray = selected
+        ? selected.map(option => option.value)
+        : [];
+
+      setConditions(valuesArray);
+    }
+  }}
                             className="my-5 w-[250px]"
                             options={healthConditionOptions}
                         />
                         <Select
                             placeholder="Gender*"
-                            value={gender}
-                            onChange={(selected) => setGender(selected)}
+                            value={gender.value}
+                            onChange={(selected) => setGender(selected.value)}
                             className="my-5 w-[250px]"
                             options={genderOptions}
                         />

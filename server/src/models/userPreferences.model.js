@@ -1,6 +1,19 @@
 import mongoose, { Schema } from "mongoose";
 import { HealthCondition } from "../dataMappings/health_conditions_mappings.js";
 
+const numericRangeValidator = (min, max, allowDecimal = true) => ({
+    validator: function (value) {
+        if (value === undefined || value === null || value === "") return true;
+
+        const regex = allowDecimal ? /^\d+(\.\d+)?$/ : /^\d+$/;
+        if (!regex.test(value)) return false;
+
+        const num = Number(value);
+        return num >= min && num <= max;
+    },
+    message: props => `${props.path} must be between ${min} and ${max}`
+});
+
 const userPreferencesSchema = new Schema(
     {
         user: {
@@ -30,10 +43,9 @@ const userPreferencesSchema = new Schema(
         },
 
         age: {
-            type: Number,
+            type: String,
             required: true,
-            min: 10,
-            max: 100,
+            validate: numericRangeValidator(10, 100)
         },
 
         gender: {
@@ -43,45 +55,47 @@ const userPreferencesSchema = new Schema(
         },
 
         height: {
-            type: Number, // cm
-            required: true,
-        },
+    type: String,
+    required: true,
+    validate: numericRangeValidator(50, 300) // cm
+},
 
-        weight: {
-            type: Number, // kg
-            required: true,
-        },
+weight: {
+    type: String,
+    required: true,
+    validate: numericRangeValidator(20, 500) // kg
+},
 
-        bodyFatPercentage: {
-            type: Number,
-        },
+bodyFatPercentage: {
+    type: String,
+    validate: numericRangeValidator(1, 70) // %
+},
 
-        // Optional personalization overrides
-        calorieTarget: {
-            type: Number,
-        },
+calorieTarget: {
+    type: String,
+    validate: numericRangeValidator(800, 10000)
+},
 
-        proteinTarget: {
-            type: Number,
-        },
+proteinTarget: {
+    type: String,
+    validate: numericRangeValidator(10, 400)
+},
 
-        allergies: {
-            type: [String],
-            default: [],
-        },
+bmi: {
+    type: String,
+    validate: numericRangeValidator(12, 50)
+},
 
-        // Optional: Store computed metrics (recommended)
-        bmi: {
-            type: Number,
-        },
+bmr: {
+    type: String,
+    validate: numericRangeValidator(800, 4000)
+},
 
-        bmr: {
-            type: Number,
-        },
+tdee: {
+    type: String,
+    validate: numericRangeValidator(1200, 5000)
+},
 
-        tdee: {
-            type: Number,
-        },
     },
     { timestamps: true }
 );
