@@ -24,6 +24,8 @@ const UserPreferencesCollector = () => {
         if (!height || !weight) return 0;
 
         const value = weight / (height / 100) ** 2;
+        if(value < 12) return "< 12";
+        if(value > 50) return "> 50"
         return Number(value.toFixed(1));
     }, [height, weight]);
 
@@ -31,10 +33,15 @@ const UserPreferencesCollector = () => {
         if (!weight || !height || !age || !gender) return 0;
 
         if (gender === "male") {
-            return Math.round(10 * weight + 6.25 * height - 5 * age + 5);
+            const ansM = Math.round(10 * weight + 6.25 * height - 5 * age + 5)
+            if(ansM < 800) return "< 800"
+            if(ansM > 4000) return "> 4000"
+            return ansM;
         }
-
-        return Math.round(10 * weight + 6.25 * height - 5 * age - 161);
+        let ansF = Math.round(10 * weight + 6.25 * height - 5 * age - 161)
+        if(ansF < 800) return "< 800"
+        if(ansF > 4000) return "> 4000"
+        return ansF;
     }, [weight, height, age, gender]);
 
     const tdee = useMemo(() => {
@@ -47,10 +54,23 @@ const UserPreferencesCollector = () => {
             active: 1.725,
             very_active: 1.9,
         };
-        console.log(activityLevel);
-        console.log(multipliers[activityLevel.value]);
-        return Math.round(bmr * multipliers[activityLevel.value]);
+        const ans = Math.round(bmr * multipliers[activityLevel.value]);
+        if(ans < 1200) return "< 1200"
+        if(ans > 5000) return "> 5000"
+        return ans
     }, [bmr, activityLevel]);
+
+    const handleBMIInfoDisplay = () => {
+
+    }
+
+    const handleBMRInfoDisplay = () => {
+
+    }
+
+    const handleTDEEInfoDisplay = () => {
+
+    }
 
     // BMI	Category (12-50)
     // < 18.5	Underweight
@@ -94,6 +114,9 @@ const UserPreferencesCollector = () => {
         } else if (bmiValue >= 40) {
             return "text-red-800";
         }
+        else{
+            return "text-gray-400";
+        }
     };
     const handleBMRColor = (bmrValue) => {
         if (gender.value == "male") {
@@ -104,6 +127,9 @@ const UserPreferencesCollector = () => {
             } else if (bmrValue > 1900) {
                 return "text-red-400";
             }
+            else {
+                return "text-gray-400";
+            }
         } else {
             if (bmrValue < 1200) {
                 return "text-gray-400";
@@ -111,6 +137,9 @@ const UserPreferencesCollector = () => {
                 return "text-green-400";
             } else if (bmrValue > 1600) {
                 return "text-red-400";
+            }
+            else {
+                return "text-gray-400";
             }
         }
     };
@@ -126,6 +155,9 @@ const UserPreferencesCollector = () => {
         } else if (tdeeValue > 4000) {
             return "text-red-400";
         }
+        else {
+            return "text-gray-400";
+        }
     };
     return (
         <section className="">
@@ -133,7 +165,7 @@ const UserPreferencesCollector = () => {
             <div className="flex">
                 <div className="flex flex-2 flex-col items-center text-lg">
                     <div className="relative my-5 flex items-center">
-                        <div className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
+                        <div onClick={handleBMIInfoDisplay} className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
                             i
                         </div>
                         <div className="absolute top-6 left-0 z-50 flex hidden w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
@@ -204,17 +236,17 @@ const UserPreferencesCollector = () => {
                                 </div>
                             </div>
                         </div>
-                        BMI&nbsp;&nbsp;
-                        <span
+                        <div>BMI</div>&nbsp;&nbsp;
+                        <div
                             className={`${handleBMIColor(bmi)} poppins-semibold`}
                         >
                             {bmi}
-                        </span>
+                        </div>
                     </div>
                     <div className="my-5 flex items-center">
-                        <span className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
+                        <button onClick={handleBMRInfoDisplay} className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
                             i
-                        </span>
+                        </button>
                         <div className="absolute top-6 left-0 z-50 flex hidden w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
                             <div>
                                 <div className="poppins-bold flex items-center justify-center whitespace-nowrap">
@@ -301,17 +333,17 @@ const UserPreferencesCollector = () => {
                                 </div>
                             </div>
                         </div>
-                        BMR&nbsp;&nbsp;
-                        <span
+                        <div>BMR</div>&nbsp;&nbsp;
+                        <div
                             className={`${handleBMRColor(bmr)} poppins-semibold`}
                         >
                             {bmr}
-                        </span>
+                        </div>
                     </div>
                     <div className="my-5 flex items-center">
-                        <span className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
+                        <button onClick={handleTDEEInfoDisplay} className="poppins-semibold-italic mx-2 cursor-pointer rounded-full bg-blue-500 px-2 text-sm text-white">
                             i
-                        </span>
+                        </button>
                         <div className="absolute hidden top-6 left-0 z-50 flex w-[300px] max-w-[500px] items-center overflow-x-auto rounded-xl bg-gray-100 p-3 text-sm text-gray-500 shadow-lg">
                             <div>
                                 <div className="flex items-center whitespace-nowrap">
@@ -407,12 +439,12 @@ const UserPreferencesCollector = () => {
                                 </div>
                             </div>
                         </div>
-                        TDEE&nbsp;&nbsp;
-                        <span
+                        <div>TDEE</div>&nbsp;&nbsp;
+                        <div
                             className={`${handleTDEEColor(tdee)} poppins-semibold`}
                         >
                             {tdee}
-                        </span>
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-4 flex-col items-center">
